@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="260.38800000000003" tests="201" failures="0" skipped="6">
+  <testsuite name="Root Suite" timestamp="2018-03-12T22:52:22" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="conversation_adapter_integration" timestamp="2018-03-12T22:52:22" tests="0" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="message()" timestamp="2018-03-12T22:52:22" tests="4" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="7.4719999999999995">
+    <testcase name="conversation_adapter_integration message() alternate_intents" time="1.188" classname="alternate_intents">
+    </testcase>
+    <testcase name="conversation_adapter_integration message() dialog_stack with 2017-02-03 version_date" time="0.478" classname="dialog_stack with 2017-02-03 version_date">
+    </testcase>
+    <testcase name="conversation_adapter_integration message() dialog_stack with 2016-09-20 version_date" time="2.175" classname="dialog_stack with 2016-09-20 version_date">
+    </testcase>
+    <testcase name="conversation_adapter_integration message() dialog_stack with 2016-07-11 version_date" time="3.631" classname="dialog_stack with 2016-07-11 version_date">
+    </testcase>
+  </testsuite>
+  <testsuite name="listWorkspaces()" timestamp="2018-03-12T22:52:29" tests="3" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.987">
+    <testcase name="conversation_adapter_integration listWorkspaces() result should contain workspaces key" time="0.45" classname="result should contain workspaces key">
+    </testcase>
+    <testcase name="conversation_adapter_integration listWorkspaces() result should contain an array of workspaces" time="0.289" classname="result should contain an array of workspaces">
+    </testcase>
+    <testcase name="conversation_adapter_integration listWorkspaces() result should return pagination information" time="0.248" classname="result should return pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="createWorkspace()" timestamp="2018-03-12T22:52:30" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.272">
+    <testcase name="conversation_adapter_integration createWorkspace() should create a new workspace" time="0.272" classname="should create a new workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateWorkspace()" timestamp="2018-03-12T22:52:31" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.599">
+    <testcase name="conversation_adapter_integration updateWorkspace() should update the workspace with intents" time="0.599" classname="should update the workspace with intents">
+    </testcase>
+  </testsuite>
+  <testsuite name="getWorkspace()" timestamp="2018-03-12T22:52:31" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="2.083">
+    <testcase name="conversation_adapter_integration getWorkspace() should get the workspace with the right intent" time="2.083" classname="should get the workspace with the right intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="createIntent()" timestamp="2018-03-12T22:52:33" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.324">
+    <testcase name="conversation_adapter_integration createIntent() should create an intent" time="0.324" classname="should create an intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="getIntents()" timestamp="2018-03-12T22:52:34" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="1.472">
+    <testcase name="conversation_adapter_integration getIntents() should get intents of the workspace" time="0.256" classname="should get intents of the workspace">
+    </testcase>
+    <testcase name="conversation_adapter_integration getIntents() should have pagination information" time="1.216" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getIntent()" timestamp="2018-03-12T22:52:35" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.306">
+    <testcase name="conversation_adapter_integration getIntent() should get an intent of the workspace" time="0.306" classname="should get an intent of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateIntent()" timestamp="2018-03-12T22:52:35" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.259">
+    <testcase name="conversation_adapter_integration updateIntent() should update an intent of the workspace" time="0.259" classname="should update an intent of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="getExamples()" timestamp="2018-03-12T22:52:36" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.5349999999999999">
+    <testcase name="conversation_adapter_integration getExamples() should get all examples of intent" time="0.287" classname="should get all examples of intent">
+    </testcase>
+    <testcase name="conversation_adapter_integration getExamples() should have pagination information" time="0.248" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="createExample()" timestamp="2018-03-12T22:52:36" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.254">
+    <testcase name="conversation_adapter_integration createExample() should create an example in the intent" time="0.254" classname="should create an example in the intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="getExample()" timestamp="2018-03-12T22:52:37" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.233">
+    <testcase name="conversation_adapter_integration getExample() should get an example of intent" time="0.233" classname="should get an example of intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateExample()" timestamp="2018-03-12T22:52:37" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.262">
+    <testcase name="conversation_adapter_integration updateExample() should update an example of intent" time="0.262" classname="should update an example of intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteExample()" timestamp="2018-03-12T22:52:37" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.271">
+    <testcase name="conversation_adapter_integration deleteExample() should delete an example of intent" time="0.271" classname="should delete an example of intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteIntent()" timestamp="2018-03-12T22:52:37" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.299">
+    <testcase name="conversation_adapter_integration deleteIntent() should delete an intent of the workspace" time="0.299" classname="should delete an intent of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="createCounterExample()" timestamp="2018-03-12T22:52:38" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.25">
+    <testcase name="conversation_adapter_integration createCounterExample() should return the newly created counterExample of the workspace" time="0.25" classname="should return the newly created counterExample of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="getCounterExample()" timestamp="2018-03-12T22:52:38" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.616">
+    <testcase name="conversation_adapter_integration getCounterExample() should return a counterExample" time="0.616" classname="should return a counterExample">
+    </testcase>
+  </testsuite>
+  <testsuite name="getCounterExamples()" timestamp="2018-03-12T22:52:38" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.549">
+    <testcase name="conversation_adapter_integration getCounterExamples() should return counterExamples of the workspace" time="0.268" classname="should return counterExamples of the workspace">
+    </testcase>
+    <testcase name="conversation_adapter_integration getCounterExamples() should return counterExamples of the workspace with pagination" time="0.281" classname="should return counterExamples of the workspace with pagination">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateCounterExample()" timestamp="2018-03-12T22:52:39" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.255">
+    <testcase name="conversation_adapter_integration updateCounterExample() should return an updated counterExample" time="0.255" classname="should return an updated counterExample">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteCounterExample()" timestamp="2018-03-12T22:52:39" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.42">
+    <testcase name="conversation_adapter_integration deleteCounterExample() should delete a counterExample" time="0.42" classname="should delete a counterExample">
+    </testcase>
+  </testsuite>
+  <testsuite name="createEntity()" timestamp="2018-03-12T22:52:40" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.251">
+    <testcase name="conversation_adapter_integration createEntity() should create an entity" time="0.251" classname="should create an entity">
+    </testcase>
+  </testsuite>
+  <testsuite name="getEntities()" timestamp="2018-03-12T22:52:40" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.594">
+    <testcase name="conversation_adapter_integration getEntities() should get entities of the workspace" time="0.301" classname="should get entities of the workspace">
+    </testcase>
+    <testcase name="conversation_adapter_integration getEntities() should have pagination information" time="0.293" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getEntity()" timestamp="2018-03-12T22:52:41" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.23">
+    <testcase name="conversation_adapter_integration getEntity() should get an entity of the workspace" time="0.23" classname="should get an entity of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateEntity()" timestamp="2018-03-12T22:52:41" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.373">
+    <testcase name="conversation_adapter_integration updateEntity() should update an entity of the workspace" time="0.373" classname="should update an entity of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="createValue()" timestamp="2018-03-12T22:52:41" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.266">
+    <testcase name="conversation_adapter_integration createValue() should create a value" time="0.266" classname="should create a value">
+    </testcase>
+  </testsuite>
+  <testsuite name="getValues()" timestamp="2018-03-12T22:52:41" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.503">
+    <testcase name="conversation_adapter_integration getValues() should get values of the entity" time="0.245" classname="should get values of the entity">
+    </testcase>
+    <testcase name="conversation_adapter_integration getValues() should have pagination information" time="0.258" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getValue()" timestamp="2018-03-12T22:52:42" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.249">
+    <testcase name="conversation_adapter_integration getValue() should get a value of the entity" time="0.249" classname="should get a value of the entity">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateValue()" timestamp="2018-03-12T22:52:42" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="1.673">
+    <testcase name="conversation_adapter_integration updateValue() should update a value of the entity" time="1.673" classname="should update a value of the entity">
+    </testcase>
+  </testsuite>
+  <testsuite name="createSynonym()" timestamp="2018-03-12T22:52:44" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.407">
+    <testcase name="conversation_adapter_integration createSynonym() should create a synonym" time="0.407" classname="should create a synonym">
+    </testcase>
+  </testsuite>
+  <testsuite name="getSynonyms()" timestamp="2018-03-12T22:52:44" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="1.4169999999999998">
+    <testcase name="conversation_adapter_integration getSynonyms() should get synonyms of the value" time="1.144" classname="should get synonyms of the value">
+    </testcase>
+    <testcase name="conversation_adapter_integration getSynonyms() should have pagination information" time="0.273" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getSynonym()" timestamp="2018-03-12T22:52:46" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.252">
+    <testcase name="conversation_adapter_integration getSynonym() should get a synonym of the value" time="0.252" classname="should get a synonym of the value">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateSynonym()" timestamp="2018-03-12T22:52:46" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.28">
+    <testcase name="conversation_adapter_integration updateSynonym() should update a synonym of the value" time="0.28" classname="should update a synonym of the value">
+    </testcase>
+  </testsuite>
+  <testsuite name="getLogs()" timestamp="2018-03-12T22:52:46" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.273">
+    <testcase name="conversation_adapter_integration getLogs() should return logs" time="0.273" classname="should return logs">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteSynonym()" timestamp="2018-03-12T22:52:46" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.495">
+    <testcase name="conversation_adapter_integration deleteSynonym() should delete a synonym of the value" time="0.495" classname="should delete a synonym of the value">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteValue()" timestamp="2018-03-12T22:52:47" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.324">
+    <testcase name="conversation_adapter_integration deleteValue() should delete a value of the entity" time="0.324" classname="should delete a value of the entity">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteEntity()" timestamp="2018-03-12T22:52:47" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.737">
+    <testcase name="conversation_adapter_integration deleteEntity() should delete an entity of the workspace" time="0.737" classname="should delete an entity of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="createDialogNode()" timestamp="2018-03-12T22:52:48" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.326">
+    <testcase name="conversation_adapter_integration createDialogNode() should create an dialog node" time="0.326" classname="should create an dialog node">
+    </testcase>
+  </testsuite>
+  <testsuite name="getDialogNodes()" timestamp="2018-03-12T22:52:48" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.476">
+    <testcase name="conversation_adapter_integration getDialogNodes() should get dialog nodes of the workspace" time="0.235" classname="should get dialog nodes of the workspace">
+    </testcase>
+    <testcase name="conversation_adapter_integration getDialogNodes() should have pagination information" time="0.241" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getDialogNode()" timestamp="2018-03-12T22:52:49" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.259">
+    <testcase name="conversation_adapter_integration getDialogNode() should get a dialog node of the workspace" time="0.259" classname="should get a dialog node of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateDialogNode()" timestamp="2018-03-12T22:52:49" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.234">
+    <testcase name="conversation_adapter_integration updateDialogNode() should update a dialog node of the workspace" time="0.234" classname="should update a dialog node of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteDialogNode()" timestamp="2018-03-12T22:52:49" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.251">
+    <testcase name="conversation_adapter_integration deleteDialogNode() should delete a dialog node of the workspace" time="0.251" classname="should delete a dialog node of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteWorkspace()" timestamp="2018-03-12T22:52:50" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.291">
+    <testcase name="conversation_adapter_integration deleteWorkspace() should delete the workplace" time="0.291" classname="should delete the workplace">
+    </testcase>
+  </testsuite>
+  <testsuite name="personality_insights_v3_adapter_integration" timestamp="2018-03-12T22:52:50" tests="3" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="1.4000000000000001">
+    <testcase name="personality_insights_v3_adapter_integration profile()" time="0.5" classname="profile()">
+    </testcase>
+    <testcase name="personality_insights_v3_adapter_integration profile_html()" time="0.433" classname="profile_html()">
+    </testcase>
+    <testcase name="personality_insights_v3_adapter_integration profile_csv()" time="0.467" classname="profile_csv()">
+    </testcase>
+  </testsuite>
+  <testsuite name="tone_analyzer_adapter_integration" timestamp="2018-03-12T22:52:51" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="1.024">
+    <testcase name="tone_analyzer_adapter_integration tone()" time="0.635" classname="tone()">
+    </testcase>
+    <testcase name="tone_analyzer_adapter_integration tone_chat()" time="0.389" classname="tone_chat()">
+    </testcase>
+  </testsuite>
+  <testsuite name="conversation_integration" timestamp="2018-03-12T22:52:52" tests="0" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="message()" timestamp="2018-03-12T22:52:52" tests="4" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="3.899">
+    <testcase name="conversation_integration message() alternate_intents" time="0.482" classname="alternate_intents">
+    </testcase>
+    <testcase name="conversation_integration message() dialog_stack with 2017-02-03 version" time="0.288" classname="dialog_stack with 2017-02-03 version">
+    </testcase>
+    <testcase name="conversation_integration message() dialog_stack with 2016-09-20 version" time="1.139" classname="dialog_stack with 2016-09-20 version">
+    </testcase>
+    <testcase name="conversation_integration message() dialog_stack with 2016-07-11 version" time="1.99" classname="dialog_stack with 2016-07-11 version">
+    </testcase>
+  </testsuite>
+  <testsuite name="listWorkspaces()" timestamp="2018-03-12T22:52:56" tests="3" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.9339999999999999">
+    <testcase name="conversation_integration listWorkspaces() result should contain workspaces key" time="0.296" classname="result should contain workspaces key">
+    </testcase>
+    <testcase name="conversation_integration listWorkspaces() result should contain an array of workspaces" time="0.38" classname="result should contain an array of workspaces">
+    </testcase>
+    <testcase name="conversation_integration listWorkspaces() result should return pagination information" time="0.258" classname="result should return pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="createWorkspace()" timestamp="2018-03-12T22:52:57" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.273">
+    <testcase name="conversation_integration createWorkspace() should create a new workspace" time="0.273" classname="should create a new workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateWorkspace()" timestamp="2018-03-12T22:52:57" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.715">
+    <testcase name="conversation_integration updateWorkspace() should update the workspace with intents" time="0.715" classname="should update the workspace with intents">
+    </testcase>
+  </testsuite>
+  <testsuite name="getWorkspace()" timestamp="2018-03-12T22:52:58" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.317">
+    <testcase name="conversation_integration getWorkspace() should get the workspace with the right intent" time="0.317" classname="should get the workspace with the right intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="createIntent()" timestamp="2018-03-12T22:52:58" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.324">
+    <testcase name="conversation_integration createIntent() should create an intent" time="0.324" classname="should create an intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="getIntents()" timestamp="2018-03-12T22:52:59" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.7290000000000001">
+    <testcase name="conversation_integration getIntents() should get intents of the workspace" time="0.46" classname="should get intents of the workspace">
+    </testcase>
+    <testcase name="conversation_integration getIntents() should have pagination information" time="0.269" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getIntent()" timestamp="2018-03-12T22:52:59" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.233">
+    <testcase name="conversation_integration getIntent() should get an intent of the workspace" time="0.233" classname="should get an intent of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateIntent()" timestamp="2018-03-12T22:53:00" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="1.486">
+    <testcase name="conversation_integration updateIntent() should update an intent of the workspace" time="1.486" classname="should update an intent of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="getExamples()" timestamp="2018-03-12T22:53:01" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.505">
+    <testcase name="conversation_integration getExamples() should get all examples of intent" time="0.249" classname="should get all examples of intent">
+    </testcase>
+    <testcase name="conversation_integration getExamples() should have pagination information" time="0.256" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="createExample()" timestamp="2018-03-12T22:53:02" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.247">
+    <testcase name="conversation_integration createExample() should create an example in the intent" time="0.247" classname="should create an example in the intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="getExample()" timestamp="2018-03-12T22:53:02" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.369">
+    <testcase name="conversation_integration getExample() should get an example of intent" time="0.369" classname="should get an example of intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateExample()" timestamp="2018-03-12T22:53:02" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.309">
+    <testcase name="conversation_integration updateExample() should update an example of intent" time="0.309" classname="should update an example of intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteExample()" timestamp="2018-03-12T22:53:03" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.241">
+    <testcase name="conversation_integration deleteExample() should delete an example of intent" time="0.241" classname="should delete an example of intent">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteIntent()" timestamp="2018-03-12T22:53:03" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.303">
+    <testcase name="conversation_integration deleteIntent() should delete an intent of the workspace" time="0.303" classname="should delete an intent of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="createCounterexample()" timestamp="2018-03-12T22:53:03" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.285">
+    <testcase name="conversation_integration createCounterexample() should return the newly created counterexample of the workspace" time="0.285" classname="should return the newly created counterexample of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="getCounterexample()" timestamp="2018-03-12T22:53:03" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.288">
+    <testcase name="conversation_integration getCounterexample() should return a counterexample" time="0.288" classname="should return a counterexample">
+    </testcase>
+  </testsuite>
+  <testsuite name="listCounterexamples()" timestamp="2018-03-12T22:53:04" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.6779999999999999">
+    <testcase name="conversation_integration listCounterexamples() should return counterexamples of the workspace" time="0.384" classname="should return counterexamples of the workspace">
+    </testcase>
+    <testcase name="conversation_integration listCounterexamples() should return counterexamples of the workspace with pagination" time="0.294" classname="should return counterexamples of the workspace with pagination">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateCounterexample()" timestamp="2018-03-12T22:53:04" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.264">
+    <testcase name="conversation_integration updateCounterexample() should return an updated counterexample" time="0.264" classname="should return an updated counterexample">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteCounterexample()" timestamp="2018-03-12T22:53:05" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.26">
+    <testcase name="conversation_integration deleteCounterexample() should delete a counterexample" time="0.26" classname="should delete a counterexample">
+    </testcase>
+  </testsuite>
+  <testsuite name="createEntity()" timestamp="2018-03-12T22:53:05" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.311">
+    <testcase name="conversation_integration createEntity() should create an entity" time="0.311" classname="should create an entity">
+    </testcase>
+  </testsuite>
+  <testsuite name="listEntities()" timestamp="2018-03-12T22:53:05" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.931">
+    <testcase name="conversation_integration listEntities() should get entities of the workspace" time="0.298" classname="should get entities of the workspace">
+    </testcase>
+    <testcase name="conversation_integration listEntities() should have pagination information" time="0.633" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getEntity()" timestamp="2018-03-12T22:53:06" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.315">
+    <testcase name="conversation_integration getEntity() should get an entity of the workspace" time="0.315" classname="should get an entity of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateEntity()" timestamp="2018-03-12T22:53:06" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.36">
+    <testcase name="conversation_integration updateEntity() should update an entity of the workspace" time="0.36" classname="should update an entity of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="createValue()" timestamp="2018-03-12T22:53:07" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.367">
+    <testcase name="conversation_integration createValue() should create a value" time="0.367" classname="should create a value">
+    </testcase>
+  </testsuite>
+  <testsuite name="listValues()" timestamp="2018-03-12T22:53:07" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.688">
+    <testcase name="conversation_integration listValues() should get values of the entity" time="0.432" classname="should get values of the entity">
+    </testcase>
+    <testcase name="conversation_integration listValues() should have pagination information" time="0.256" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getValue()" timestamp="2018-03-12T22:53:08" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.231">
+    <testcase name="conversation_integration getValue() should get a value of the entity" time="0.231" classname="should get a value of the entity">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateValue()" timestamp="2018-03-12T22:53:08" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.859">
+    <testcase name="conversation_integration updateValue() should update a value of the entity" time="0.859" classname="should update a value of the entity">
+    </testcase>
+  </testsuite>
+  <testsuite name="createSynonym()" timestamp="2018-03-12T22:53:09" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.242">
+    <testcase name="conversation_integration createSynonym() should create a synonym" time="0.242" classname="should create a synonym">
+    </testcase>
+  </testsuite>
+  <testsuite name="listSynonyms()" timestamp="2018-03-12T22:53:09" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.512">
+    <testcase name="conversation_integration listSynonyms() should get synonyms of the value" time="0.255" classname="should get synonyms of the value">
+    </testcase>
+    <testcase name="conversation_integration listSynonyms() should have pagination information" time="0.257" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getSynonym()" timestamp="2018-03-12T22:53:10" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.226">
+    <testcase name="conversation_integration getSynonym() should get a synonym of the value" time="0.226" classname="should get a synonym of the value">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateSynonym()" timestamp="2018-03-12T22:53:10" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.283">
+    <testcase name="conversation_integration updateSynonym() should update a synonym of the value" time="0.283" classname="should update a synonym of the value">
+    </testcase>
+  </testsuite>
+  <testsuite name="listLogs()" timestamp="2018-03-12T22:53:10" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.295">
+    <testcase name="conversation_integration listLogs() should return logs" time="0.295" classname="should return logs">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteSynonym()" timestamp="2018-03-12T22:53:11" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.234">
+    <testcase name="conversation_integration deleteSynonym() should delete a synonym of the value" time="0.234" classname="should delete a synonym of the value">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteValue()" timestamp="2018-03-12T22:53:11" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.238">
+    <testcase name="conversation_integration deleteValue() should delete a value of the entity" time="0.238" classname="should delete a value of the entity">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteEntity()" timestamp="2018-03-12T22:53:11" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.394">
+    <testcase name="conversation_integration deleteEntity() should delete an entity of the workspace" time="0.394" classname="should delete an entity of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="createDialogNode()" timestamp="2018-03-12T22:53:11" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.517">
+    <testcase name="conversation_integration createDialogNode() should create an dialog node" time="0.517" classname="should create an dialog node">
+    </testcase>
+  </testsuite>
+  <testsuite name="listDialogNodes()" timestamp="2018-03-12T22:53:12" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.484">
+    <testcase name="conversation_integration listDialogNodes() should get dialog nodes of the workspace" time="0.248" classname="should get dialog nodes of the workspace">
+    </testcase>
+    <testcase name="conversation_integration listDialogNodes() should have pagination information" time="0.236" classname="should have pagination information">
+    </testcase>
+  </testsuite>
+  <testsuite name="getDialogNode()" timestamp="2018-03-12T22:53:12" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.27">
+    <testcase name="conversation_integration getDialogNode() should get a dialog node of the workspace" time="0.27" classname="should get a dialog node of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="updateDialogNode()" timestamp="2018-03-12T22:53:13" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.262">
+    <testcase name="conversation_integration updateDialogNode() should update a dialog node of the workspace" time="0.262" classname="should update a dialog node of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteDialogNode()" timestamp="2018-03-12T22:53:13" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.246">
+    <testcase name="conversation_integration deleteDialogNode() should delete a dialog node of the workspace" time="0.246" classname="should delete a dialog node of the workspace">
+    </testcase>
+  </testsuite>
+  <testsuite name="deleteWorkspace()" timestamp="2018-03-12T22:53:13" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.238">
+    <testcase name="conversation_integration deleteWorkspace() should delete the workplace" time="0.238" classname="should delete the workplace">
+    </testcase>
+  </testsuite>
+  <testsuite name="dialog_integration" timestamp="2018-03-12T22:53:13" tests="7" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="2.447">
+    <testcase name="dialog_integration getProfile()" time="0.822" classname="getProfile()">
+    </testcase>
+    <testcase name="dialog_integration updateProfile()" time="0.546" classname="updateProfile()">
+    </testcase>
+    <testcase name="dialog_integration getConversation()" time="0.279" classname="getConversation()">
+    </testcase>
+    <testcase name="dialog_integration conversation()" time="0.403" classname="conversation()">
+    </testcase>
+    <testcase name="dialog_integration getContent()" time="0.212" classname="getContent()">
+    </testcase>
+    <testcase name="dialog_integration getDialogs()" time="0.185" classname="getDialogs()">
+    </testcase>
+  </testsuite>
+  <testsuite name="discovery_integration" timestamp="2018-03-12T22:53:16" tests="7" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="3.416">
+    <testcase name="discovery_integration should getEnvironments()" time="1.744" classname="should getEnvironments()">
+    </testcase>
+    <testcase name="discovery_integration should getEnvironment()" time="0.315" classname="should getEnvironment()">
+    </testcase>
+    <testcase name="discovery_integration should getConfigurations()" time="0.236" classname="should getConfigurations()">
+    </testcase>
+    <testcase name="discovery_integration should getConfiguration()" time="0.249" classname="should getConfiguration()">
+    </testcase>
+    <testcase name="discovery_integration getCollections()" time="0.296" classname="getCollections()">
+    </testcase>
+    <testcase name="discovery_integration should perform a federated query for notices" time="0.576" classname="should perform a federated query for notices">
+    </testcase>
+  </testsuite>
+  <testsuite name="add-query-delete" timestamp="2018-03-12T22:53:19" tests="4" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="3.165">
+    <testcase name="discovery_integration add-query-delete addDocument()" time="0.798" classname="addDocument()">
+    </testcase>
+    <testcase name="discovery_integration add-query-delete addJsonDocument()" time="0.305" classname="addJsonDocument()">
+    </testcase>
+    <testcase name="discovery_integration add-query-delete query()" time="0.532" classname="query()">
+    </testcase>
+    <testcase name="discovery_integration add-query-delete delete all documents" time="1.53" classname="delete all documents">
+    </testcase>
+  </testsuite>
+  <testsuite name="language_translator_integration" timestamp="2018-03-12T22:53:22" tests="4" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="personality_insights_v2_integration" timestamp="2018-03-12T22:53:22" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.976">
+    <testcase name="personality_insights_v2_integration profile()" time="0.549" classname="profile()">
+    </testcase>
+    <testcase name="personality_insights_v2_integration profile_html()" time="0.427" classname="profile_html()">
+    </testcase>
+  </testsuite>
+  <testsuite name="personality_insights_v3_integration" timestamp="2018-03-12T22:53:23" tests="4" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="2.137">
+    <testcase name="personality_insights_v3_integration profile with text content" time="0.772" classname="profile with text content">
+    </testcase>
+    <testcase name="personality_insights_v3_integration profile with text content and all params" time="0.428" classname="profile with text content and all params">
+    </testcase>
+    <testcase name="personality_insights_v3_integration profile with html content" time="0.426" classname="profile with html content">
+    </testcase>
+    <testcase name="personality_insights_v3_integration profile with csv response" time="0.511" classname="profile with csv response">
+    </testcase>
+  </testsuite>
+  <testsuite name="speech_to_text_integration" timestamp="2018-03-12T22:53:26" tests="3" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="5.962000000000001">
+    <testcase name="speech_to_text_integration recognize()" time="2.723" classname="recognize()">
+    </testcase>
+    <testcase name="speech_to_text_integration recognize() keywords" time="3.02" classname="recognize() keywords">
+    </testcase>
+    <testcase name="speech_to_text_integration getModels()" time="0.219" classname="getModels()">
+    </testcase>
+  </testsuite>
+  <testsuite name="createRecognizeStream()" timestamp="2018-03-12T22:53:32" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="3.748">
+    <testcase name="speech_to_text_integration createRecognizeStream() transcribes audio over a websocket" time="2.943" classname="transcribes audio over a websocket">
+    </testcase>
+    <testcase name="speech_to_text_integration createRecognizeStream() works when stream has no words" time="0.805" classname="works when stream has no words">
+    </testcase>
+  </testsuite>
+  <testsuite name="customization" timestamp="2018-03-12T22:53:35" tests="20" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="64.71000000000001">
+    <testcase name="speech_to_text_integration customization createCustomization()" time="0.347" classname="createCustomization()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization listCustomizations()" time="0.268" classname="listCustomizations()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization getCustomization()" time="0.217" classname="getCustomization()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization addCorpus() - stream" time="0.756" classname="addCorpus() - stream">
+    </testcase>
+    <testcase name="speech_to_text_integration customization addCorpus() - buffer" time="7.721" classname="addCorpus() - buffer">
+    </testcase>
+    <testcase name="speech_to_text_integration customization addCorpus() - string, overwrite" time="8.153" classname="addCorpus() - string, overwrite">
+    </testcase>
+    <testcase name="speech_to_text_integration customization listCorpora()" time="0.215" classname="listCorpora()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization addWords()" time="7.013" classname="addWords()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization addWord()" time="10.404" classname="addWord()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization listWords()" time="0.266" classname="listWords()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization getWord()" time="0.222" classname="getWord()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization deleteWord()" time="0.452" classname="deleteWord()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization deleteWord()" time="0.566" classname="deleteWord()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization addAudio()" time="1.407" classname="addAudio()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization deleteAudio()" time="4.786" classname="deleteAudio()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization deleteCorpus()" time="0.4" classname="deleteCorpus()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization trainCustomization()" time="0.56" classname="trainCustomization()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization recognize() - with customization" time="18.591" classname="recognize() - with customization">
+    </testcase>
+    <testcase name="speech_to_text_integration customization resetCustomization()" time="1.736" classname="resetCustomization()">
+    </testcase>
+    <testcase name="speech_to_text_integration customization deleteCustomization()" time="0.63" classname="deleteCustomization()">
+    </testcase>
+  </testsuite>
+  <testsuite name="asynchronous api" timestamp="2018-03-12T22:54:40" tests="5" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="20.978">
+    <testcase name="speech_to_text_integration asynchronous api registerCallback()" time="0.214" classname="registerCallback()">
+    </testcase>
+    <testcase name="speech_to_text_integration asynchronous api createRecognitionJob()" time="0.335" classname="createRecognitionJob()">
+    </testcase>
+    <testcase name="speech_to_text_integration asynchronous api getRecognitionJobs()" time="3.061" classname="getRecognitionJobs()">
+    </testcase>
+    <testcase name="speech_to_text_integration asynchronous api getRecognitionJob()" time="3.873" classname="getRecognitionJob()">
+    </testcase>
+    <testcase name="speech_to_text_integration asynchronous api deleteRecognitionJob()" time="13.495" classname="deleteRecognitionJob()">
+    </testcase>
+  </testsuite>
+  <testsuite name="createLanguageModel" timestamp="2018-03-12T22:55:01" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.313">
+    <testcase name="speech_to_text_integration createLanguageModel should create a language model" time="0.313" classname="should create a language model">
+    </testcase>
+  </testsuite>
+  <testsuite name="text_to_speech_integration" timestamp="2018-03-12T22:55:02" tests="3" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0.842">
+    <testcase name="text_to_speech_integration voices()" time="0.286" classname="voices()">
+    </testcase>
+    <testcase name="text_to_speech_integration synthesize()" time="0.292" classname="synthesize()">
+    </testcase>
+    <testcase name="text_to_speech_integration pronunciation()" time="0.264" classname="pronunciation()">
+    </testcase>
+  </testsuite>
+  <testsuite name="customization" timestamp="2018-03-12T22:55:02" tests="11" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="4.531000000000001">
+    <testcase name="text_to_speech_integration customization createCustomization()" time="0.381" classname="createCustomization()">
+    </testcase>
+    <testcase name="text_to_speech_integration customization getCustomizations()" time="0.233" classname="getCustomizations()">
+    </testcase>
+    <testcase name="text_to_speech_integration customization getCustomizations() with language" time="1.346" classname="getCustomizations() with language">
+    </testcase>
+    <testcase name="text_to_speech_integration customization updateCustomization()" time="0.36" classname="updateCustomization()">
+    </testcase>
+    <testcase name="text_to_speech_integration customization getCustomization()" time="0.261" classname="getCustomization()">
+    </testcase>
+    <testcase name="text_to_speech_integration customization addWords()" time="0.427" classname="addWords()">
+    </testcase>
+    <testcase name="text_to_speech_integration customization addWord()" time="0.355" classname="addWord()">
+    </testcase>
+    <testcase name="text_to_speech_integration customization getWords()" time="0.234" classname="getWords()">
+    </testcase>
+    <testcase name="text_to_speech_integration customization getWord()" time="0.228" classname="getWord()">
+    </testcase>
+    <testcase name="text_to_speech_integration customization deleteWord()" time="0.32" classname="deleteWord()">
+    </testcase>
+    <testcase name="text_to_speech_integration customization deleteCustomization()" time="0.386" classname="deleteCustomization()">
+    </testcase>
+  </testsuite>
+  <testsuite name="tone_analyzer_integration" timestamp="2018-03-12T22:55:07" tests="3" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="1.254">
+    <testcase name="tone_analyzer_integration tone()" time="0.615" classname="tone()">
+    </testcase>
+    <testcase name="tone_analyzer_integration failing tone()" time="0.001" classname="failing tone()">
+    </testcase>
+    <testcase name="tone_analyzer_integration toneChat()" time="0.638" classname="toneChat()">
+    </testcase>
+  </testsuite>
+  <testsuite name="visual_recognition_integration_custom_classifiers" timestamp="2018-03-12T22:55:08" tests="0" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="create, list, get, delete" timestamp="2018-03-12T22:55:38" tests="4" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="32.306000000000004">
+    <testcase name="visual_recognition_integration_custom_classifiers create, list, get, delete createClassifier()" time="1.052" classname="createClassifier()">
+    </testcase>
+    <testcase name="visual_recognition_integration_custom_classifiers create, list, get, delete listClassifiers()" time="29.661" classname="listClassifiers()">
+    </testcase>
+    <testcase name="visual_recognition_integration_custom_classifiers create, list, get, delete getClassifier()" time="0.567" classname="getClassifier()">
+    </testcase>
+    <testcase name="visual_recognition_integration_custom_classifiers create, list, get, delete deleteClassifier()" time="1.026" classname="deleteClassifier()">
+    </testcase>
+  </testsuite>
+  <testsuite name="pre-populated classifier" timestamp="2018-03-12T22:56:11" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="51.21">
+    <testcase name="visual_recognition_integration_custom_classifiers pre-populated classifier should classify an uploaded image " time="21.992" classname="should classify an uploaded image ">
+    </testcase>
+    <testcase name="visual_recognition_integration_custom_classifiers pre-populated classifier should come back empty when nothing passes the classification threshold " time="29.218" classname="should come back empty when nothing passes the classification threshold ">
+    </testcase>
+  </testsuite>
+  <testsuite name="visual_recognition_integration" timestamp="2018-03-12T22:57:26" tests="0" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="classify()" timestamp="2018-03-12T22:57:26" tests="3" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="4.175">
+    <testcase name="visual_recognition_integration classify() should classify an uploaded image" time="1.498" classname="should classify an uploaded image">
+    </testcase>
+    <testcase name="visual_recognition_integration classify() should classify from a buffer" time="1.636" classname="should classify from a buffer">
+    </testcase>
+    <testcase name="visual_recognition_integration classify() should classify an image via url" time="1.041" classname="should classify an image via url">
+    </testcase>
+  </testsuite>
+  <testsuite name="detectFaces()" timestamp="2018-03-12T22:57:30" tests="2" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/auth_helper.js" failures="0" time="4.4670000000000005">
+    <testcase name="visual_recognition_integration detectFaces() should detect faces in an uploaded image" time="2.154" classname="should detect faces in an uploaded image">
+    </testcase>
+    <testcase name="visual_recognition_integration detectFaces() should detect faces in an image via url" time="2.313" classname="should detect faces in an image via url">
+    </testcase>
+  </testsuite>
+  <testsuite name="Webpack" timestamp="2018-03-12T22:57:35" tests="1" file="/Users/milbuild/jenkins-build/workspace/Node_SDK_Testing/test/integration/test.webpack.js" failures="0" time="2.286">
+    <testcase name="Webpack should generate a webpack bundle without errors" time="2.286" classname="should generate a webpack bundle without errors">
+    </testcase>
+  </testsuite>
+</testsuites>
