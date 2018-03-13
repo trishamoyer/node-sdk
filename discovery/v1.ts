@@ -1,6 +1,22 @@
-import GeneratedDiscoveryV1 = require('./v1-generated');
+/**
+ * Copyright 2017 IBM All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import extend = require('extend');
 import isStream = require('isstream');
+import GeneratedDiscoveryV1 = require('./v1-generated');
 
 class DiscoveryV1 extends GeneratedDiscoveryV1 {
   static VERSION_DATE_2017_09_01: string = '2017-09-01';
@@ -41,7 +57,15 @@ class DiscoveryV1 extends GeneratedDiscoveryV1 {
     };
   }
 
+  constructor(options) {
+    // For backward compatibility, allow version to be passed in version_date.
+    const _options = extend({}, options);
+    _options.version = _options.version_date || _options.version;
+    super(_options);
+  }
+
   getEnvironments(params, callback) {
+    console.warn("WARNING: getEnvironments() was renamed to listEnvironments(). Support for getEnvironments() will be removed in the next major release");
     return super.listEnvironments(params, callback);
   }
 
@@ -60,18 +84,19 @@ class DiscoveryV1 extends GeneratedDiscoveryV1 {
   updateConfiguration(params, callback) {
     // name is now a required parameter
     // file is now split into conversions, enrichments and normalizations
-    const _params = params || {};
-    if (_params.file) {
-      const { conversions, enrichments, normalizations } = _params.file;
-      _params.conversions = conversions;
-      _params.enrichments = enrichments;
-      _params.normalizations = normalizations;
+    const newParams = params || {};
+    if (newParams.file) {
+      const { conversions, enrichments, normalizations } = newParams.file;
+      newParams.conversions = conversions;
+      newParams.enrichments = enrichments;
+      newParams.normalizations = normalizations;
     }
-    _params.name = _params.name || '_';
-    return super.updateConfiguration(_params, callback);
+    newParams.name = newParams.name || '_';
+    return super.updateConfiguration(newParams, callback);
   }
 
   getCollections(params, callback) {
+    console.warn("WARNING: getCollections() was renamed to listCollections(). Support for getCollections() will be removed in the next major release");
     return super.listCollections(params, callback);
   }
 
@@ -92,6 +117,7 @@ class DiscoveryV1 extends GeneratedDiscoveryV1 {
   }
 
   getCollectionFields(params, callback) {
+    console.warn("WARNING: getCollectionFields() was renamed to listCollectionFields(). Support for getCollectionFields() will be removed in the next major release");
     // listFields expects an array of collection ids
     if (params && !Array.isArray(params.collection_id)) {
       params.collection_ids = [params.collection_id];
@@ -100,31 +126,33 @@ class DiscoveryV1 extends GeneratedDiscoveryV1 {
   }
 
   getConfigurations(params, callback) {
+    console.warn("WARNING: getConfigurations() was renamed to listConfigurations(). Support for getConfigurations() will be removed in the next major release");
     return super.listConfigurations(params, callback);
   }
 
   createConfiguration(params, callback) {
     // name is now a required parameter
     // file is now split into conversions, enrichments and normalizations
-    const _params = params || {};
-    if (_params.file) {
-      const { conversions, enrichments, normalizations } = _params.file;
-      _params.conversions = conversions;
-      _params.enrichments = enrichments;
-      _params.normalizations = normalizations;
+    const newParams = params || {};
+    if (newParams.file) {
+      const { conversions, enrichments, normalizations } = newParams.file;
+      newParams.conversions = conversions;
+      newParams.enrichments = enrichments;
+      newParams.normalizations = normalizations;
     }
-    _params.name = _params.name || '_';
-    return super.createConfiguration(_params, callback);
+    newParams.name = newParams.name || '_';
+    return super.createConfiguration(newParams, callback);
   }
 
   addJsonDocument(params, callback) {
+    console.warn("WARNING: addJsonDocument() was renamed to addDocument(). Support for addJsonDocument() will be removed in the next major release");
     const fileParamType: string = typeof params.file;
     if (fileParamType !== 'object') {
       throw new Error(
         `Argument error: params.file must be an object, but got ${fileParamType}.`
       );
     }
-    const _params = extend(params, {
+    const newParams = extend(params, {
       file: {
         value: JSON.stringify(params.file),
         options: {
@@ -132,17 +160,18 @@ class DiscoveryV1 extends GeneratedDiscoveryV1 {
         }
       }
     });
-    return this.addDocument(_params, callback);
+    return this.addDocument(newParams, callback);
   }
 
   updateJsonDocument(params, callback) {
+    console.warn("WARNING: updateJsonDocument() was renamed to updateDocument(). Support for updateJsonDocument() will be removed in the next major release");
     const fileParamType = typeof params.file;
     if (fileParamType !== 'object') {
       throw new Error(
         `Argument error: params.file must be an object, but got ${fileParamType}.`
       );
     }
-    const _params = extend(params, {
+    const newParams = extend(params, {
       file: {
         value: JSON.stringify(params.file),
         options: {
@@ -150,25 +179,25 @@ class DiscoveryV1 extends GeneratedDiscoveryV1 {
         }
       }
     });
-    return this.updateDocument(_params, callback);
+    return this.updateDocument(newParams, callback);
   }
 
   query(params, callback) {
-    let _params = params || {};
+    const newParams = params || {};
     // query and natural_language_query can't both be populated
-    if (_params.query && _params.natural_language_query) {
-      delete _params.natural_language_query;
+    if (newParams.query && newParams.natural_language_query) {
+      delete newParams.natural_language_query;
     }
-    if (_params.return) {
-      _params.return_fields = _params.return;
+    if (newParams.return) {
+      newParams.return_fields = newParams.return;
     }
     // passages parameters are now snake case
-    Object.keys(_params).forEach(
+    Object.keys(newParams).forEach(
       key =>
         key.match(/passages\..*/i) &&
-        (_params[key.replace('.', '_')] = _params[key])
+        (newParams[key.replace('.', '_')] = newParams[key])
     );
-    return super.query(_params, callback);
+    return super.query(newParams, callback);
   }
 }
 

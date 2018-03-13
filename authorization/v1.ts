@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import { createRequest } from '../lib/requestwrapper';
-import { BaseService } from '../lib/base_service';
 import url = require('url');
+import { BaseService } from '../lib/base_service';
+import { createRequest } from '../lib/requestwrapper';
 
 class AuthorizationV1 extends BaseService {
-  name;
-  version;
   static URL: string = 'https://stream.watsonplatform.net/authorization/api';
+  name;
+  serviceVersion;
 
   /**
    * Authorization Service
@@ -73,6 +73,6 @@ class AuthorizationV1 extends BaseService {
 }
 
 AuthorizationV1.prototype.name = 'authorization';
-AuthorizationV1.prototype.version = 'v1';
+AuthorizationV1.prototype.serviceVersion = 'v1';
 
 export = AuthorizationV1;

@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-import GeneratedPersonalityInsightsV3 = require('./v3-generated');
 import extend = require('extend');
 import pick = require('object.pick');
 import { RequestResponse } from 'request';
-import { createRequest } from '../lib/requestwrapper';
-import { getMissingParams, isHTML, toLowerKeys } from '../lib/helper';
 import { BaseService } from '../lib/base_service';
+import { getMissingParams, isHTML, toLowerKeys } from '../lib/helper';
+import { createRequest } from '../lib/requestwrapper';
+import GeneratedPersonalityInsightsV3 = require('./v3-generated');
 
 class PersonalityInsightsV3 extends GeneratedPersonalityInsightsV3 {
   constructor(options) {
-    super(options);
+    // For backward compatibility, allow version to be passed in version_date.
+    const _options = extend({}, options);
+    _options.version = _options.version_date || _options.version;
+    super(_options);
   }
 
   profile(params, callback) {
@@ -41,16 +44,16 @@ class PersonalityInsightsV3 extends GeneratedPersonalityInsightsV3 {
       return;
     }
 
-    let content_type = null;
+    let contentType = null;
     if (params.text) {
-      content_type = isHTML(params.text) ? 'text/html' : 'text/plain';
+      contentType = isHTML(params.text) ? 'text/html' : 'text/plain';
     } else {
-      content_type = 'application/json';
+      contentType = 'application/json';
     }
 
-    let _params: GeneratedPersonalityInsightsV3.ProfileParams = {
+    const newParams: GeneratedPersonalityInsightsV3.ProfileParams = {
       content: params.text || pick(params, ['contentItems']),
-      content_type: content_type,
+      content_type: contentType,
       raw_scores: params.raw_scores,
       csv_headers: params.csv_headers,
       consumption_preferences: params.consumption_preferences
@@ -59,19 +62,19 @@ class PersonalityInsightsV3 extends GeneratedPersonalityInsightsV3 {
     const headers = toLowerKeys(params.headers);
 
     if (headers['accept-language']) {
-      _params.accept_language = headers['accept-language'];
+      newParams.accept_language = headers['accept-language'];
     }
     if (headers['content-type']) {
-      _params.content_type = headers['content-type'];
+      newParams.content_type = headers['content-type'];
     }
     if (headers['content-language']) {
-      _params.content_language = headers['content-language'];
+      newParams.content_language = headers['content-language'];
     }
     if (headers['accept'] === 'text/csv') {
-      return this.profile_csv(_params, callback);
+      return this.profile_csv(newParams, callback);
     }
 
-    return super.profile(_params, callback);
+    return super.profile(newParams, callback);
   }
 
   /**
@@ -88,41 +91,41 @@ class PersonalityInsightsV3 extends GeneratedPersonalityInsightsV3 {
    * @param {boolean} [params.csv_headers] - If `true`, column labels are returned with a CSV response; if `false` (the default), they are not. Applies only when the `Accept` header is set to `text/csv`.
    * @param {boolean} [params.consumption_preferences] - If `true`, information about consumption preferences is returned with the results; if `false` (the default), the response does not include the information.
    * @param {Function} [callback] - The callback that handles the response.
-   * @returns {ReadableStream|void}
+   * @returns {NodeJS.ReadableStream|void}
    */
   profile_csv(
     params: GeneratedPersonalityInsightsV3.ProfileParams,
     callback?: GeneratedPersonalityInsightsV3.Callback<
       GeneratedPersonalityInsightsV3.Profile
     >
-  ): ReadableStream | void {
-    const _params = extend({}, params);
-    const _callback = callback ? callback : () => {};
+  ): NodeJS.ReadableStream | void {
+    const newParams = extend({}, params);
+    const _callback = callback ? callback : () => { /*noop*/ };
     const requiredParams = ['content', 'content_type'];
-    const missingParams = getMissingParams(_params, requiredParams);
+    const missingParams = getMissingParams(newParams, requiredParams);
     if (missingParams) {
       return _callback(missingParams);
     }
-    const body = _params.content;
+    const body = newParams.content;
     const query = {
-      raw_scores: _params.raw_scores,
-      csv_headers: _params.csv_headers,
-      consumption_preferences: _params.consumption_preferences
+      raw_scores: newParams.raw_scores,
+      csv_headers: newParams.csv_headers,
+      consumption_preferences: newParams.consumption_preferences
     };
     const parameters = {
       options: {
         url: '/v3/profile',
         method: 'POST',
-        json: _params.content_type === 'application/json',
-        body: body,
+        json: newParams.content_type === 'application/json',
+        body,
         qs: query
       },
       defaultOptions: extend(true, this._options, {
         headers: {
           Accept: 'text/csv',
-          'Content-Type': _params.content_type,
-          'Content-Language': _params.content_language,
-          'Accept-Language': _params.accept_language
+          'Content-Type': newParams.content_type,
+          'Content-Language': newParams.content_language,
+          'Accept-Language': newParams.accept_language
         }
       })
     };

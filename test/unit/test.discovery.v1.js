@@ -19,36 +19,32 @@ describe('discovery-v1', function() {
     username: 'batman',
     password: 'bruce-wayne',
     url: 'http://ibm.com:80',
-    version: 'v1',
-    version_date: DiscoveryV1.VERSION_DATE_2017_08_01
+    version: DiscoveryV1.VERSION_DATE_2017_08_01,
   };
 
   const service_v2016_04_27 = {
     username: 'batman',
     password: 'bruce-wayne',
     url: 'http://ibm.com:80',
-    version: 'v1',
-    version_date: DiscoveryV1.VERSION_DATE_2017_04_27
+    version: DiscoveryV1.VERSION_DATE_2017_04_27,
   };
 
   const service_v2016_12_15 = {
     username: 'batman',
     password: 'bruce-wayne',
     url: 'http://ibm.com:80',
-    version: 'v1',
-    version_date: DiscoveryV1.VERSION_DATE_2016_12_15
+    version: DiscoveryV1.VERSION_DATE_2016_12_15,
   };
 
-  const service_without_version_date = {
+  const service_without_version = {
     password: 'bruce-wayne',
     url: 'http://ibm.com:80',
-    version: 'v1',
-    username: 'batman'
+    username: 'batman',
   };
 
   const queryPayload = {
     collection_id: 'col-guid',
-    environment_id: 'env-guid'
+    environment_id: 'env-guid',
   };
 
   const paths = {
@@ -75,15 +71,15 @@ describe('discovery-v1', function() {
     trainingexample:
       '/v1/environments/env-guid/collections/col-guid/training_data/query-guid/examples/example-guid',
     queryRelations: '/v1/environments/env-guid/collections/col-guid/query_relations',
-    queryEntities: '/v1/environments/env-guid/collections/col-guid/query_entities'
+    queryEntities: '/v1/environments/env-guid/collections/col-guid/query_entities',
   };
 
-  it('should generate version_date was not specified (negative test)', function() {
+  it('should generate version was not specified (negative test)', function() {
     function doThrowThing() {
-      const discovery = new DiscoveryV1(service_without_version_date);
+      const discovery = new DiscoveryV1(service_without_version);
       assert(discovery);
     }
-    assert.throws(doThrowThing, /version_date/);
+    assert.throws(doThrowThing, /version was not specified/);
   });
 
   describe('discovery versions', function() {
@@ -92,31 +88,31 @@ describe('discovery-v1', function() {
         nock.disableNetConnect();
         // grr! these should be in the individual tests where they are needed!
         nock(service.url)
-          .post(paths.environments + '?version=' + service.version_date)
+          .post(paths.environments + '?version=' + service.version)
           .reply(200, { environment_id: 'yes' })
-          .get(paths.environmentinfo + '?version=' + service.version_date)
+          .get(paths.environmentinfo + '?version=' + service.version)
           .reply(200, { environment_id: 'info' })
-          .put(paths.environmentinfo + '?version=' + service.version_date)
+          .put(paths.environmentinfo + '?version=' + service.version)
           .reply(200, { environment_id: 'yes' })
-          .delete(paths.environmentinfo + '?version=' + service.version_date)
+          .delete(paths.environmentinfo + '?version=' + service.version)
           .reply(200, { environment_id: 'info' })
-          .get(paths.collections + '?version=' + service.version_date)
+          .get(paths.collections + '?version=' + service.version)
           .reply(200, { collection_id: 'yes' })
-          .get(paths.collectioninfo + '?version=' + service.version_date)
+          .get(paths.collectioninfo + '?version=' + service.version)
           .reply(200, { collection_id: 'info' })
-          .get(paths.query + '?version=' + service.version_date)
+          .get(paths.query + '?version=' + service.version)
           .reply(200, { query: 'yes' })
-          .post(paths.collections + '?version=' + service.version_date)
+          .post(paths.collections + '?version=' + service.version)
           .reply(200, { collection_id: 'yes' })
-          .delete(paths.delete_collection + '?version=' + service.version_date)
+          .delete(paths.delete_collection + '?version=' + service.version)
           .reply(200, { config: 'yes' })
-          .post(paths.add_document + '?version=' + service.version_date)
+          .post(paths.add_document + '?version=' + service.version)
           .reply(200, { add_doc: 'yes' })
-          .delete(paths.documentinfo + '?version=' + service.version_date)
+          .delete(paths.documentinfo + '?version=' + service.version)
           .reply(200, { delete_doc: 'yes' })
-          .get(paths.configurations + '?version=' + service.version_date)
+          .get(paths.configurations + '?version=' + service.version)
           .reply(200, { configs: 'yes' })
-          .get(paths.fields + '?version=' + service.version_date)
+          .get(paths.fields + '?version=' + service.version)
           .reply(200, { fields: 'yes' });
       });
 
@@ -126,12 +122,12 @@ describe('discovery-v1', function() {
 
       const discovery = new DiscoveryV1(service);
 
-      describe(`discovery(version_date=${service.version_date})`, function() {
+      describe(`discovery(version=${service.version})`, function() {
         it('should generate a valid payload', function() {
           const req = discovery.getEnvironments({}, noop);
           assert.equal(
             req.uri.href,
-            service.url + paths.environments + '?version=' + service.version_date
+            service.url + paths.environments + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -140,7 +136,7 @@ describe('discovery-v1', function() {
           const req = discovery.createEnvironment(
             {
               name: 'new environment',
-              description: 'my description'
+              description: 'my description',
             },
             noop
           );
@@ -151,7 +147,7 @@ describe('discovery-v1', function() {
           const req = discovery.createEnvironment(
             {
               name: 'new environment',
-              description: 'my description'
+              description: 'my description',
             },
             noop
           );
@@ -165,7 +161,7 @@ describe('discovery-v1', function() {
             {
               name: 'new environment',
               description: 'my description',
-              size: 0
+              size: 0,
             },
             noop
           );
@@ -179,7 +175,7 @@ describe('discovery-v1', function() {
             {
               environment_id: 'env-guid',
               name: 'my environment updated',
-              description: 'my description updated'
+              description: 'my description updated',
             },
             noop
           );
@@ -190,7 +186,7 @@ describe('discovery-v1', function() {
           const req = discovery.getEnvironment({ environment_id: 'env-guid' }, noop);
           assert.equal(
             req.uri.href,
-            service.url + paths.environmentinfo + '?version=' + service.version_date
+            service.url + paths.environmentinfo + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -199,7 +195,7 @@ describe('discovery-v1', function() {
           const req = discovery.deleteEnvironment({ environment_id: 'env-guid' }, noop);
           assert.equal(
             req.uri.href,
-            service.url + paths.environmentinfo + '?version=' + service.version_date
+            service.url + paths.environmentinfo + '?version=' + service.version
           );
           assert.equal(req.method, 'DELETE');
         });
@@ -210,13 +206,13 @@ describe('discovery-v1', function() {
               environment_id: 'env-guid',
               configuration_id: 'config-guid',
               name: 'new collection',
-              description: 'my description'
+              description: 'my description',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.collections + '?version=' + service.version_date
+            service.url + paths.collections + '?version=' + service.version
           );
           assert.equal(req.method, 'POST');
         });
@@ -225,7 +221,7 @@ describe('discovery-v1', function() {
           const req = discovery.getCollections({ environment_id: 'env-guid' }, noop);
           assert.equal(
             req.uri.href,
-            service.url + paths.collections + '?version=' + service.version_date
+            service.url + paths.collections + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -234,13 +230,13 @@ describe('discovery-v1', function() {
           const req = discovery.updateCollection(
             {
               environment_id: 'env-guid',
-              collection_id: 'col-guid'
+              collection_id: 'col-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.collectioninfo + '?version=' + service.version_date
+            service.url + paths.collectioninfo + '?version=' + service.version
           );
           assert.equal(req.method, 'PUT');
         });
@@ -248,7 +244,7 @@ describe('discovery-v1', function() {
         it('should get information about a specific collections fields', function() {
           const params = {
             environment_id: 'env-guid',
-            collection_id: 'col-guid'
+            collection_id: 'col-guid',
           };
           const req = discovery.getCollectionFields(params, noop);
           assert.equal(
@@ -256,7 +252,7 @@ describe('discovery-v1', function() {
             service.url +
               paths.fields +
               '?version=' +
-              service.version_date +
+              service.version +
               '&collection_ids=' +
               params.collection_id
           );
@@ -267,13 +263,13 @@ describe('discovery-v1', function() {
           const req = discovery.getCollection(
             {
               environment_id: 'env-guid',
-              collection_id: 'col-guid'
+              collection_id: 'col-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.collectioninfo + '?version=' + service.version_date
+            service.url + paths.collectioninfo + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -281,12 +277,12 @@ describe('discovery-v1', function() {
         it('should list collections fields', function() {
           const params = {
             environment_id: 'env-guid',
-            collection_id: 'col-guid'
+            collection_id: 'col-guid',
           };
           const req = discovery.listCollectionFields(params, noop);
           assert.equal(
             req.uri.href,
-            service.url + paths.collectionfields + '?version=' + service.version_date
+            service.url + paths.collectionfields + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -295,13 +291,13 @@ describe('discovery-v1', function() {
           const req = discovery.deleteCollection(
             {
               environment_id: 'env-guid',
-              collection_id: 'col-guid'
+              collection_id: 'col-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.delete_collection + '?version=' + service.version_date
+            service.url + paths.delete_collection + '?version=' + service.version
           );
           assert.equal(req.method, 'DELETE');
         });
@@ -310,7 +306,7 @@ describe('discovery-v1', function() {
           const req = discovery.getConfigurations({ environment_id: 'env-guid' }, noop);
           assert.equal(
             req.uri.href,
-            service.url + paths.configurations + '?version=' + service.version_date
+            service.url + paths.configurations + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -322,13 +318,13 @@ describe('discovery-v1', function() {
               // file is a JSON Object not a file
               file: JSON.parse(
                 fs.readFileSync(path.join(__dirname, '../resources/discovery-sampleAddConf.json'))
-              )
+              ),
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.configurations + '?version=' + service.version_date
+            service.url + paths.configurations + '?version=' + service.version
           );
           assert.equal(req.method, 'POST');
         });
@@ -336,13 +332,13 @@ describe('discovery-v1', function() {
         it('should test the new configuration', function() {
           const req = discovery.testConfigurationInEnvironment(
             {
-              environment_id: 'env-guid'
+              environment_id: 'env-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.testconfiguration + '?version=' + service.version_date
+            service.url + paths.testconfiguration + '?version=' + service.version
           );
           assert.equal(req.method, 'POST');
         });
@@ -357,13 +353,13 @@ describe('discovery-v1', function() {
                 fs.readFileSync(
                   path.join(__dirname, '../resources/discovery-sampleUpdateConf.json')
                 )
-              )
+              ),
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.configurationinfo + '?version=' + service.version_date
+            service.url + paths.configurationinfo + '?version=' + service.version
           );
           assert.equal(req.method, 'PUT');
         });
@@ -375,7 +371,7 @@ describe('discovery-v1', function() {
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.configurationinfo + '?version=' + service.version_date
+            service.url + paths.configurationinfo + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -384,13 +380,13 @@ describe('discovery-v1', function() {
           const req = discovery.deleteConfiguration(
             {
               environment_id: 'env-guid',
-              configuration_id: 'config-guid'
+              configuration_id: 'config-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.configurationinfo + '?version=' + service.version_date
+            service.url + paths.configurationinfo + '?version=' + service.version
           );
           assert.equal(req.method, 'DELETE');
         });
@@ -401,13 +397,13 @@ describe('discovery-v1', function() {
               {
                 environment_id: 'env-guid',
                 collection_id: 'col-guid',
-                file: fs.createReadStream(path.join(__dirname, '../resources/sampleHtml.html'))
+                file: fs.createReadStream(path.join(__dirname, '../resources/sampleHtml.html')),
               },
               noop
             );
             assert.equal(
               req.uri.href,
-              service.url + paths.add_document + '?version=' + service.version_date
+              service.url + paths.add_document + '?version=' + service.version
             );
             assert.equal(req.method, 'POST');
           });
@@ -417,13 +413,13 @@ describe('discovery-v1', function() {
               {
                 environment_id: 'env-guid',
                 collection_id: 'col-guid',
-                document_id: 'document-guid'
+                document_id: 'document-guid',
               },
               noop
             );
             assert.equal(
               req.uri.href,
-              service.url + paths.documentinfo + '?version=' + service.version_date
+              service.url + paths.documentinfo + '?version=' + service.version
             );
             assert.equal(req.method, 'GET');
           });
@@ -434,13 +430,13 @@ describe('discovery-v1', function() {
                 environment_id: 'env-guid',
                 collection_id: 'col-guid',
                 document_id: 'document-guid',
-                file: fs.createReadStream(path.join(__dirname, '../resources/sampleHtml.html'))
+                file: fs.createReadStream(path.join(__dirname, '../resources/sampleHtml.html')),
               },
               noop
             );
             assert.equal(
               req.uri.href,
-              service.url + paths.documentinfo + '?version=' + service.version_date
+              service.url + paths.documentinfo + '?version=' + service.version
             );
             assert.equal(req.method, 'POST');
           });
@@ -450,20 +446,20 @@ describe('discovery-v1', function() {
             nock.cleanAll();
             nock.disableNetConnect();
             const expectation = nock('http://ibm.com:80', {
-              encodedQueryParams: true
+              encodedQueryParams: true,
             })
               .post('/v1/environments/env-guid/collections/col-guid/documents')
-              .query({ version: service.version_date })
+              .query({ version: service.version })
               .reply({
                 status: 'processing',
-                document_id: '45556e23-f2b1-449d-8f27-489b514000ff'
+                document_id: '45556e23-f2b1-449d-8f27-489b514000ff',
               });
             discovery.addDocument(
               {
                 environment_id: 'env-guid',
                 collection_id: 'col-guid',
                 file: fs.createReadStream(path.join(__dirname, '../resources/sampleHtml.html')),
-                metadata: { action: 'testing' }
+                metadata: { action: 'testing' },
               },
               function(err) {
                 assert.ifError(err);
@@ -479,13 +475,13 @@ describe('discovery-v1', function() {
             {
               environment_id: 'env-guid',
               collection_id: 'col-guid',
-              document_id: 'document-guid'
+              document_id: 'document-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.documentinfo + '?version=' + service.version_date
+            service.url + paths.documentinfo + '?version=' + service.version
           );
           assert.equal(req.method, 'DELETE');
         });
@@ -497,9 +493,9 @@ describe('discovery-v1', function() {
               collection_id: 'col-guid',
               filter: 'yesplease',
               count: 10,
-              sort: '+field_1,-field_2',
+              sort: ['+field_1', '-field_2'],
               natural_language_query: 'a question about stuff and things',
-              passages: true
+              passages: true,
             },
             noop
           );
@@ -508,7 +504,7 @@ describe('discovery-v1', function() {
             service.url +
             paths.query +
             '?version=' +
-            service.version_date + // query string params order changed, shouldn't be a problem for the service...
+            service.version + // query string params order changed, shouldn't be a problem for the service...
               '&filter=yesplease&natural_language_query=a%20question%20about%20stuff%20and%20things&passages=true&count=10&sort=%2Bfield_1%2C-field_2'
           );
           assert.equal(req.method, 'GET');
@@ -521,9 +517,9 @@ describe('discovery-v1', function() {
               collection_id: 'col-guid',
               filter: 'yesplease',
               count: 10,
-              sort: '+field_1,-field_2',
+              sort: ['+field_1', '-field_2'],
               natural_language_query: 'a question about stuff and things',
-              passages: true
+              passages: true,
             },
             noop
           );
@@ -532,7 +528,7 @@ describe('discovery-v1', function() {
             service.url +
             paths.queryNotices +
             '?version=' +
-            service.version_date + // query string params order changed, shouldn't be a problem for the service...
+            service.version + // query string params order changed, shouldn't be a problem for the service...
               '&filter=yesplease&natural_language_query=a%20question%20about%20stuff%20and%20things&passages=true&count=10&sort=%2Bfield_1%2C-field_2'
           );
           assert.equal(req.method, 'GET');
@@ -542,11 +538,11 @@ describe('discovery-v1', function() {
           const req = discovery.federatedQuery(
             {
               environment_id: 'env-guid',
-              collection_ids: '[col1-guid,col2-guid]',
+              collection_ids: ['col1-guid', 'col2-guid'],
               filter: 'yesplease',
               count: 10,
-              sort: '+field_1,-field_2',
-              natural_language_query: 'a question about stuff and things'
+              sort: ['+field_1', '-field_2'],
+              natural_language_query: 'a question about stuff and things',
             },
             noop
           );
@@ -555,8 +551,8 @@ describe('discovery-v1', function() {
             service.url +
             paths.federatedquery +
             '?version=' +
-            service.version_date + // query string params order changed, shouldn't be a problem for the service...
-              '&collection_ids=%5Bcol1-guid%2Ccol2-guid%5D&filter=yesplease&natural_language_query=a%20question%20about%20stuff%20and%20things&count=10&sort=%2Bfield_1%2C-field_2'
+            service.version + // query string params order changed, shouldn't be a problem for the service...
+              '&collection_ids=col1-guid%2Ccol2-guid&filter=yesplease&natural_language_query=a%20question%20about%20stuff%20and%20things&count=10&sort=%2Bfield_1%2C-field_2'
           );
           assert.equal(req.method, 'GET');
         });
@@ -565,11 +561,11 @@ describe('discovery-v1', function() {
           const req = discovery.federatedQueryNotices(
             {
               environment_id: 'env-guid',
-              collection_ids: '[col1-guid,col2-guid]',
+              collection_ids: ['col1-guid', 'col2-guid'],
               filter: 'yesplease',
               count: 10,
-              sort: '+field_1,-field_2',
-              natural_language_query: 'a question about stuff and things'
+              sort: ['+field_1', '-field_2'],
+              natural_language_query: 'a question about stuff and things',
             },
             noop
           );
@@ -578,8 +574,8 @@ describe('discovery-v1', function() {
             service.url +
             paths.federatednotices +
             '?version=' +
-            service.version_date + // query string params order changed, shouldn't be a problem for the service...
-              '&collection_ids=%5Bcol1-guid%2Ccol2-guid%5D&filter=yesplease&natural_language_query=a%20question%20about%20stuff%20and%20things&count=10&sort=%2Bfield_1%2C-field_2'
+            service.version + // query string params order changed, shouldn't be a problem for the service...
+              '&collection_ids=col1-guid%2Ccol2-guid&filter=yesplease&natural_language_query=a%20question%20about%20stuff%20and%20things&count=10&sort=%2Bfield_1%2C-field_2'
           );
           assert.equal(req.method, 'GET');
         });
@@ -591,13 +587,13 @@ describe('discovery-v1', function() {
               collection_id: 'col-guid',
               filter: 'yesplease',
               natural_language_query: 'a question about stuff and things',
-              examples: '[]'
+              examples: '[]',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.trainingdata + '?version=' + service.version_date
+            service.url + paths.trainingdata + '?version=' + service.version
           );
           assert.equal(req.method, 'POST');
         });
@@ -607,13 +603,13 @@ describe('discovery-v1', function() {
             {
               environment_id: 'env-guid',
               collection_id: 'col-guid',
-              query_id: 'query-guid'
+              query_id: 'query-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.createtrainingexample + '?version=' + service.version_date
+            service.url + paths.createtrainingexample + '?version=' + service.version
           );
           assert.equal(req.method, 'POST');
         });
@@ -622,13 +618,13 @@ describe('discovery-v1', function() {
           const req = discovery.deleteAllTrainingData(
             {
               environment_id: 'env-guid',
-              collection_id: 'col-guid'
+              collection_id: 'col-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.trainingdata + '?version=' + service.version_date
+            service.url + paths.trainingdata + '?version=' + service.version
           );
           assert.equal(req.method, 'DELETE');
         });
@@ -638,13 +634,13 @@ describe('discovery-v1', function() {
             {
               environment_id: 'env-guid',
               collection_id: 'col-guid',
-              query_id: 'query-guid'
+              query_id: 'query-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.trainingdatainfo + '?version=' + service.version_date
+            service.url + paths.trainingdatainfo + '?version=' + service.version
           );
           assert.equal(req.method, 'DELETE');
         });
@@ -655,13 +651,13 @@ describe('discovery-v1', function() {
               environment_id: 'env-guid',
               collection_id: 'col-guid',
               query_id: 'query-guid',
-              example_id: 'example-guid'
+              example_id: 'example-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.trainingexample + '?version=' + service.version_date
+            service.url + paths.trainingexample + '?version=' + service.version
           );
           assert.equal(req.method, 'DELETE');
         });
@@ -671,13 +667,13 @@ describe('discovery-v1', function() {
             {
               environment_id: 'env-guid',
               collection_id: 'col-guid',
-              query_id: 'query-guid'
+              query_id: 'query-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.trainingdatainfo + '?version=' + service.version_date
+            service.url + paths.trainingdatainfo + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -688,13 +684,13 @@ describe('discovery-v1', function() {
               environment_id: 'env-guid',
               collection_id: 'col-guid',
               query_id: 'query-guid',
-              example_id: 'example-guid'
+              example_id: 'example-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.trainingexample + '?version=' + service.version_date
+            service.url + paths.trainingexample + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -703,13 +699,13 @@ describe('discovery-v1', function() {
           const req = discovery.listTrainingData(
             {
               environment_id: 'env-guid',
-              collection_id: 'col-guid'
+              collection_id: 'col-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.trainingdata + '?version=' + service.version_date
+            service.url + paths.trainingdata + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -719,13 +715,13 @@ describe('discovery-v1', function() {
             {
               environment_id: 'env-guid',
               collection_id: 'col-guid',
-              query_id: 'query-guid'
+              query_id: 'query-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.createtrainingexample + '?version=' + service.version_date
+            service.url + paths.createtrainingexample + '?version=' + service.version
           );
           assert.equal(req.method, 'GET');
         });
@@ -736,13 +732,13 @@ describe('discovery-v1', function() {
               environment_id: 'env-guid',
               collection_id: 'col-guid',
               query_id: 'query-guid',
-              example_id: 'example-guid'
+              example_id: 'example-guid',
             },
             noop
           );
           assert.equal(
             req.uri.href,
-            service.url + paths.trainingexample + '?version=' + service.version_date
+            service.url + paths.trainingexample + '?version=' + service.version
           );
           assert.equal(req.method, 'PUT');
         });
@@ -781,16 +777,16 @@ describe('discovery-v1', function() {
             const src = {
               value: 'foo',
               options: {
-                filename: 'foo.bar'
-              }
+                filename: 'foo.bar',
+              },
             };
             const actual = DiscoveryV1._ensureFilename(src);
             assert.equal(actual, src);
             assert.deepEqual(actual, {
               value: 'foo',
               options: {
-                filename: 'foo.bar'
-              }
+                filename: 'foo.bar',
+              },
             });
           });
 
@@ -798,16 +794,16 @@ describe('discovery-v1', function() {
             const src = {
               value: '{"foo": "bar"}',
               options: {
-                contentType: 'application/json'
-              }
+                contentType: 'application/json',
+              },
             };
             const actual = DiscoveryV1._ensureFilename(src);
             assert.deepEqual(actual, {
               value: '{"foo": "bar"}',
               options: {
                 contentType: 'application/json',
-                filename: '_'
-              }
+                filename: '_',
+              },
             });
             assert.notEqual(
               actual,
@@ -821,8 +817,8 @@ describe('discovery-v1', function() {
             assert.deepEqual(DiscoveryV1._ensureFilename(src), {
               value: src,
               options: {
-                filename: '_'
-              }
+                filename: '_',
+              },
             });
           });
 
@@ -831,8 +827,8 @@ describe('discovery-v1', function() {
             assert.deepEqual(DiscoveryV1._ensureFilename(src), {
               value: src,
               options: {
-                filename: '_'
-              }
+                filename: '_',
+              },
             });
           });
 
@@ -841,8 +837,8 @@ describe('discovery-v1', function() {
             assert.deepEqual(DiscoveryV1._ensureFilename(src), {
               value: src,
               options: {
-                filename: '_'
-              }
+                filename: '_',
+              },
             });
           });
         }); // end of _ensureFilename()
@@ -858,7 +854,7 @@ describe('discovery-v1', function() {
             const req = discovery.queryRelations(queryPayload, noop);
             assert.equal(
               req.uri.href,
-              service.url + paths.queryRelations + '?version=' + service.version_date
+              service.url + paths.queryRelations + '?version=' + service.version
             );
           });
         });
@@ -875,7 +871,7 @@ describe('discovery-v1', function() {
             const req = discovery.queryEntities(queryPayload, noop);
             assert.equal(
               req.uri.href,
-              service.url + paths.queryEntities + '?version=' + service.version_date
+              service.url + paths.queryEntities + '?version=' + service.version
             );
           });
         });

@@ -1,14 +1,15 @@
-import cookie = require('cookie');
-import pick = require('object.pick');
 import async = require('async');
-import isStream = require('isstream');
+import cookie = require('cookie');
 import extend = require('extend');
-import GeneratedSpeechToTextV1 = require('./v1-generated');
-import RecognizeStream = require('../lib/recognize-stream');
-import { createRequest as requestFactory } from '../lib/requestwrapper';
+import isStream = require('isstream');
+import pick = require('object.pick');
 import { parse } from 'url';
 import { getMissingParams } from '../lib/helper';
+import RecognizeStream = require('../lib/recognize-stream');
+import { createRequest as requestFactory } from '../lib/requestwrapper';
+import GeneratedSpeechToTextV1 = require('./v1-generated');
 
+// tslint:disable-next-line:no-var-requires
 const pkg = require('../package.json');
 
 const protocols = {
@@ -86,30 +87,32 @@ function formatChunk(chunk: string) {
 }
 
 class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
+  static ERR_NO_CORPORA = 'ERR_NO_CORPORA';
+  static ERR_TIMEOUT = 'ERR_TIMEOUT';
+
   constructor(options) {
     super(options);
   }
 
-  static ERR_NO_CORPORA = 'ERR_NO_CORPORA';
-  static ERR_TIMEOUT = 'ERR_TIMEOUT';
+
 
   getModels(params, callback) {
+    console.warn("WARNING: getModels() was renamed to listModels(). Support for getModels() will be removed in the next major release");
     return super.listModels(params, callback);
   }
 
   getCustomization(params, callback) {
+    console.warn("WARNING: getCustomization() was renamed to getLanguageModel(). Support for getCustomization() will be removed in the next major release");
     return super.getLanguageModel(params, callback);
   }
 
-  getRecognizeStatus(params, callback) {
-    return super.getSessionStatus(params, callback);
-  }
-
   getRecognitionJob(params, callback) {
+    console.warn("WARNING: getRecognitionJob() was renamed to checkJob(). Support for getRecognitionJob() will be removed in the next major release");
     return super.checkJob(params, callback);
   }
 
   createCustomization(params, callback) {
+    console.warn("WARNING: createCustomization() was renamed to createLanguageModel(). Support for createCustomization() will be removed in the next major release");
     if (params && !params.content_type) {
       params.content_type = 'application/json';
     }
@@ -117,18 +120,22 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
   }
 
   getRecognitionJobs(params, callback) {
+    console.warn("WARNING: getRecognitionJobs() was renamed to checkJobs(). Support for getRecognitionJobs() will be removed in the next major release");
     return super.checkJobs(params, callback);
   }
 
   deleteRecognitionJob(params, callback) {
+    console.warn("WARNING: deleteRecognitionJob() was renamed to deleteJob(). Support for deleteRecognitionJob() will be removed in the next major release");
     return super.deleteJob(params, callback);
   }
 
   getCustomizations(params, callback) {
+    console.warn("WARNING: getCustomizations() was renamed to listLanguageModels(). Support for getCustomizations() will be removed in the next major release");
     return super.listLanguageModels(params, callback);
   }
 
   createRecognitionJob(params, callback) {
+    console.warn("WARNING: createRecognitionJob() was renamed to createJob(). Support for createRecognitionJob() will be removed in the next major release");
     if (params && Array.isArray(params.events)) {
       params.events = params.events.join(',');
     }
@@ -160,6 +167,7 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
   }
 
   getCorpora(params, callback) {
+    console.warn("WARNING: getCorpora() was renamed to listCorpora(). Support for getCorpora() will be removed in the next major release");
     return super.listCorpora(params, callback);
   }
 
@@ -181,6 +189,7 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
   }
 
   getWords(params, callback) {
+    console.warn("WARNING: getWords() was renamed to listWords(). Support for getWords() will be removed in the next major release");
     return super.listWords(params, callback);
   }
 
@@ -199,32 +208,13 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
   }
 
   trainCustomization(params, callback) {
+    console.warn("WARNING: trainCustomization() was renamed to trainLanguageModel(). Support for trainCustomization() will be removed in the next major release");
     return super.trainLanguageModel(params, callback);
   }
 
   resetCustomization(params, callback) {
+    console.warn("WARNING: resetCustomization() was renamed to resetLanguageModel(). Support for resetCustomization() will be removed in the next major release");
     return super.resetLanguageModel(params, callback);
-  }
-
-  createSession(params, callback) {
-    /**
-     * Add the cookie_session to the response
-     * @private
-     * @param cb
-     * @return {Function}
-     */
-    function addSessionId(cb) {
-      return function(error, body, response) {
-        if (error) {
-          cb(error, body, response);
-          return;
-        }
-        const cookies = cookie.parse(response.headers['set-cookie'][0]);
-        body.cookie_session = cookies.SESSIONID;
-        cb(error, body, response);
-      };
-    }
-    return super.createSession(params, addSessionId(callback));
   }
 
   /**
@@ -245,8 +235,8 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
     async.parallel(
       [
         // validate that it has at least one corpus
-        function(next) {
-          self.getCorpora(params, function(err, res) {
+        (next) => {
+          self.getCorpora(params, (err, res) => {
             if (err) {
               return next(err);
             }
@@ -261,7 +251,7 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
           });
         },
         // check the customization status repeatedly until it's available
-        function(next) {
+        (next) => {
           const options = extend(
             {
               interval: 5000,
@@ -269,7 +259,7 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
             },
             params
           );
-          options.errorFilter = function(err) {
+          options.errorFilter = (err) => {
             // if it's a timeout error, then getCorpora is called again after params.interval
             // otherwise the error is passed back to the user
             // if the params.times limit is reached, the error will be passed to the user regardless
@@ -277,8 +267,8 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
           };
           async.retry(
             options,
-            function(done) {
-              self.getCorpora(params, function(err, corpora) {
+            (done) => {
+              self.getCorpora(params, (err, corpora) => {
                 if (err) {
                   done(err);
                 } else if (isProcessing(corpora)) {
@@ -299,7 +289,7 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
           );
         }
       ],
-      function(err, res) {
+      (err, res) => {
         if (err) {
           return callback(err);
         }
@@ -355,15 +345,15 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
       )
     };
     const protocol = protocols[parts.protocol.match(/https?/)[0]];
-    const recognize_req = protocol.request(options, function(result) {
+    const recognizeReq = protocol.request(options, (result) => {
       result.setEncoding('utf-8');
       let transcript = '';
 
-      result.on('data', function(chunk) {
+      result.on('data', (chunk) => {
         transcript += chunk;
       });
 
-      result.on('end', function() {
+      result.on('end', () => {
         try {
           transcript = formatChunk(transcript);
         } catch (e) {
@@ -374,10 +364,10 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
       });
     });
 
-    recognize_req.on('error', function(error) {
+    recognizeReq.on('error', (error) => {
       callback(error);
     });
-    return recognize_req;
+    return recognizeReq;
   }
 
   /**
@@ -425,9 +415,9 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
       )
     };
     const protocol = protocols[parts.protocol.match(/https?/)[0]];
-    const req = protocol.request(options, function(result) {
+    const req = protocol.request(options, (result) => {
       result.setEncoding('utf-8');
-      result.on('data', function(chunk) {
+      result.on('data', (chunk) => {
         try {
           chunk = formatChunk(chunk);
         } catch (e) {
@@ -438,7 +428,7 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
       });
     });
 
-    req.on('error', function(error) {
+    req.on('error', (error) => {
       callback(error);
     });
 
@@ -523,7 +513,7 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
       defaultOptions: this._options
     };
     return params.audio
-      .on('response', function(response) {
+      .on('response', (response) => {
         // Replace content-type
         response.headers['content-type'] = params.content_type;
       })
@@ -531,6 +521,7 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
   }
 
   deleteCustomization(params, callback) {
+    console.warn("WARNING: deleteCustomization() was renamed to deleteLanguageModel(). Support for deleteCustomization() will be removed in the next major release");
     return super.deleteLanguageModel(params, callback);
   }
 
@@ -559,7 +550,7 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
       },
       params
     );
-    options.errorFilter = function(err) {
+    options.errorFilter = (err) => {
       // if it's a timeout error, then getCustomization is called again after params.interval
       // otherwise the error is passed back to the user
       // if the params.times limit is reached, the error will be passed to the user regardless
@@ -567,8 +558,8 @@ class SpeechToTextV1 extends GeneratedSpeechToTextV1 {
     };
     async.retry(
       options,
-      function(next) {
-        self.getCustomization(params, function(err, customization) {
+      (next) => {
+        self.getCustomization(params, (err, customization) => {
           if (err) {
             next(err);
           } else if (

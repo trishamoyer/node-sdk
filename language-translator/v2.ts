@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import GeneratedLanguageTranslatorV2 = require('./v2-generated');
 import isStream = require('isstream');
 import { getMissingParams } from '../lib/helper';
+import GeneratedLanguageTranslatorV2 = require('./v2-generated');
 
 class LanguageTranslatorV2 extends GeneratedLanguageTranslatorV2 {
   constructor(options) {
@@ -24,6 +24,7 @@ class LanguageTranslatorV2 extends GeneratedLanguageTranslatorV2 {
   }
 
   getModels(params, callback) {
+    console.warn("WARNING: getModels() was renamed to listModels(). Support for getModels() will be removed in the next major release");
     return super.listModels(params, callback);
   }
 
@@ -59,6 +60,7 @@ class LanguageTranslatorV2 extends GeneratedLanguageTranslatorV2 {
   }
 
   getIdentifiableLanguages(params, callback) {
+    console.warn("WARNING: getIdentifiableLanguages() was renamed to listIdentifiableLanguages(). Support for getIdentifiableLanguages() will be removed in the next major release");
     return super.listIdentifiableLanguages(params, callback);
   }
 }

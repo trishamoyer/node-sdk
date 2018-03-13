@@ -15,17 +15,17 @@
  */
 
 import extend = require('extend');
-import pick = require('object.pick');
-import omit = require('object.omit');
 import isStream = require('isstream');
+import omit = require('object.omit');
+import pick = require('object.pick');
 import { RequestResponse } from 'request';
-import { createRequest } from '../lib/requestwrapper';
 import { BaseService } from '../lib/base_service';
 import { FileObject } from '../lib/helper';
+import { createRequest } from '../lib/requestwrapper';
 
 class DialogV1 extends BaseService {
   static URL: string = 'https://gateway.watsonplatform.net/dialog/api';
-  
+
   /**
    * Construct a DialogV1 object.
    *
@@ -62,15 +62,15 @@ class DialogV1 extends BaseService {
   getProfile(
     params: DialogV1.GetProfileParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
-    const _params = params || {};
+  ): NodeJS.ReadableStream | void {
+    const newParams = params || {};
     const parameters = {
       options: {
         url: '/v1/dialogs/{dialog_id}/profile',
         method: 'GET',
         json: true,
-        path: _params,
-        qs: pick(_params, ['client_id', 'name'])
+        path: newParams,
+        qs: pick(newParams, ['client_id', 'name'])
       },
       requiredParams: ['dialog_id', 'client_id'],
       defaultOptions: this._options
@@ -85,14 +85,14 @@ class DialogV1 extends BaseService {
   updateProfile(
     params: DialogV1.UpdateProfileParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
-    const _params = params || {};
+  ): NodeJS.ReadableStream | void {
+    const newParams = params || {};
     const parameters = {
       options: {
         url: '/v1/dialogs/{dialog_id}/profile',
         method: 'PUT',
         json: true,
-        body: pick(_params, ['name_values', 'client_id']),
+        body: pick(newParams, ['name_values', 'client_id']),
         path: params
       },
       requiredParams: ['dialog_id', 'name_values'],
@@ -108,15 +108,15 @@ class DialogV1 extends BaseService {
   getConversation(
     params: DialogV1.GetConversationParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
-    const _params = params || {};
+  ): NodeJS.ReadableStream | void {
+    const newParams = params || {};
     const parameters = {
       options: {
         url: '/v1/dialogs/{dialog_id}/conversation',
         method: 'GET',
         json: true,
-        qs: omit(_params, ['dialog_id']),
-        path: _params
+        qs: omit(newParams, ['dialog_id']),
+        path: newParams
       },
       requiredParams: ['dialog_id', 'date_from', 'date_to'],
       defaultOptions: this._options
@@ -132,15 +132,15 @@ class DialogV1 extends BaseService {
   conversation(
     params: DialogV1.ConversationParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
-    const _params = params || {};
+  ): NodeJS.ReadableStream | void {
+    const newParams = params || {};
     const parameters = {
       options: {
         url: '/v1/dialogs/{dialog_id}/conversation',
         method: 'POST',
         json: true,
-        form: omit(_params, ['dialog_id']),
-        path: _params
+        form: omit(newParams, ['dialog_id']),
+        path: newParams
       },
       requiredParams: ['dialog_id'],
       defaultOptions: this._options
@@ -155,21 +155,21 @@ class DialogV1 extends BaseService {
   updateContent(
     params: DialogV1.UpdateContentParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
-    const _params = params || {};
+  ): NodeJS.ReadableStream | void {
+    const newParams = params || {};
     const parameters = {
       options: {
         url: '/v1/dialogs/{dialog_id}/content',
         method: 'PUT',
         json: true,
-        path: _params
+        path: newParams
       },
       requiredParams: ['dialog_id'],
       defaultOptions: extend(
         true,
         {},
         this._options,
-        pick(_params, ['headers'])
+        pick(newParams, ['headers'])
       )
     };
     return createRequest(parameters, callback);
@@ -182,14 +182,14 @@ class DialogV1 extends BaseService {
   getContent(
     params: DialogV1.GetContentParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
-    const _params = params || {};
+  ): NodeJS.ReadableStream | void {
+    const newParams = params || {};
     const parameters = {
       options: {
         url: '/v1/dialogs/{dialog_id}/content',
         method: 'GET',
         json: true,
-        path: _params
+        path: newParams
       },
       requiredParams: ['dialog_id'],
       defaultOptions: this._options
@@ -204,13 +204,13 @@ class DialogV1 extends BaseService {
   createDialog(
     params: DialogV1.CreateDialogParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
-    const _params = params || {};
-    if (!_params['file']) {
+  ): NodeJS.ReadableStream | void {
+    const newParams = params || {};
+    if (!newParams['file']) {
       callback(new Error('Missing required parameters: file'));
       return;
     }
-    if (!isStream(_params['file'])) {
+    if (!isStream(newParams['file'])) {
       callback(new Error('file is not a standard Node.js Stream'));
       return;
     }
@@ -219,7 +219,7 @@ class DialogV1 extends BaseService {
         url: '/v1/dialogs',
         method: 'POST',
         json: true,
-        formData: pick(_params, ['name', 'file'])
+        formData: pick(newParams, ['name', 'file'])
       },
       requiredParams: ['name'],
       defaultOptions: this._options
@@ -233,7 +233,7 @@ class DialogV1 extends BaseService {
   getDialogs(
     params: DialogV1.GetDialogsParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
+  ): NodeJS.ReadableStream | void {
     const parameters = {
       options: {
         url: '/v1/dialogs',
@@ -251,7 +251,7 @@ class DialogV1 extends BaseService {
   deleteDialog(
     params: DialogV1.DeleteDialogParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
+  ): NodeJS.ReadableStream | void {
     const parameters = {
       options: {
         url: '/v1/dialogs/{dialog_id}',
@@ -272,13 +272,13 @@ class DialogV1 extends BaseService {
   updateDialog(
     params: DialogV1.UpdateDialogParams,
     callback: DialogV1.Callback
-  ): ReadableStream | void {
-    const _params = params || {};
-    if (!_params['file']) {
+  ): NodeJS.ReadableStream | void {
+    const newParams = params || {};
+    if (!newParams['file']) {
       callback(new Error('Missing required parameters: file'));
       return;
     }
-    if (!isStream(_params['file'])) {
+    if (!isStream(newParams['file'])) {
       callback(new Error('file is not a standard Node.js Stream'));
       return;
     }
@@ -287,8 +287,8 @@ class DialogV1 extends BaseService {
         url: '/v1/dialogs/{dialog_id}',
         method: 'PUT',
         json: true,
-        path: _params,
-        formData: omit(_params, ['dialog_id'])
+        path: newParams,
+        formData: omit(newParams, ['dialog_id'])
       },
       requiredParams: ['dialog_id'],
       defaultOptions: this._options
@@ -298,10 +298,10 @@ class DialogV1 extends BaseService {
 }
 
 DialogV1.prototype.name = 'dialog';
-DialogV1.prototype.version = 'v1';
+DialogV1.prototype.serviceVersion = 'v1';
 
 namespace DialogV1 {
-  /** Options for the `DialogV1` constructor. **/
+  /** Options for the `DialogV1` constructor. */
   export type Options = {
     url?: string;
     username?: string;
@@ -310,7 +310,7 @@ namespace DialogV1 {
     headers?: object;
   };
 
-  /** The callback for a service request. **/
+  /** The callback for a service request. */
   export type Callback = (
     error: any,
     body?: any,
@@ -318,20 +318,20 @@ namespace DialogV1 {
   ) => void;
 
   export interface UpdateDialogParams {
-    /** The dialog template identifier. **/
+    /** The dialog template identifier.  */
     dialog_id: string;
-    /** The dialog template file. Valid file extensions are .mct for encrypeed dialog files, .json and .xml. **/
+    /** The dialog template file. Valid file extensions are .mct for encrypeed dialog files, .json and .xml.  */
     file: FileObject;
   }
 
   export interface UpdateContentParams {
-    /** The dialog template identifier. **/
+    /** The dialog template identifier.  */
     dialog_id: string;
     [key: string]: any;
   }
 
   export interface GetContentParams {
-    /** The dialog template identifier. **/
+    /** The dialog template identifier.  */
     dialog_id: string;
     [key: string]: any;
   }
@@ -339,53 +339,53 @@ namespace DialogV1 {
   export interface GetDialogsParams {}
 
   export interface CreateDialogParams {
-    /** The dialog template name. **/
+    /** The dialog template name.  */
     name: string;
-    /** The dialog template file. Valid file extensions are .mct for encrypeed dialog files, .json and .xml. **/
+    /** The dialog template file. Valid file extensions are .mct for encrypeed dialog files, .json and .xml.  */
     file: FileObject;
   }
 
   export interface DeleteDialogParams {
-    /** The dialog identifier. **/
+    /** The dialog identifier.  */
     id: string;
   }
 
   export interface ConversationParams {
-    /** The dialog template indentifier. **/
+    /** The dialog template indentifier.  */
     dialog_id: string;
-    /** A generated conversation identifier number. If it is not specified, a new conversation is started. **/
+    /** A generated conversation identifier number. If it is not specified, a new conversation is started.  */
     conversation_id: string;
-    /** A generated client identifier number. If it is not specified, a new client identifier is issued. **/
+    /** A generated client identifier number. If it is not specified, a new client identifier is issued.  */
     client_id: string;
-    /** The user input to be processed. If the conversation_id parameter is blank, this parameter is optional. **/
+    /** The user input to be processed. If the conversation_id parameter is blank, this parameter is optional.  */
     input: string;
   }
 
   export interface GetConversationParams {
-    /** The dialog template identifier. **/
+    /** The dialog template identifier.  */
     dialog_id: string;
-    /** The start of the range in YYYY-MM-DD HH:MM:SS format. **/
+    /** The start of the range in YYYY-MM-DD HH:MM:SS format.  */
     date_from: string;
-    /** The end of the range in YYYY-MM-DD HH:MM:SS format. **/
+    /** The end of the range in YYYY-MM-DD HH:MM:SS format.  */
     date_to: string;
-    /** The offset starting point in the conversation result list. The default value is 0. **/
+    /** The offset starting point in the conversation result list. The default value is 0.  */
     offset: number;
-    /** The maximum number of conversations to retrieve. The default value is 10000. **/
+    /** The maximum number of conversations to retrieve. The default value is 10000.  */
     limit: number;
   }
 
   export interface GetProfileParams {
-    /** The dialog template identifier. **/
+    /** The dialog template identifier.  */
     dialog_id: string;
-    /** A client ID obtained from /dialog. **/
+    /** A client ID obtained from /dialog.  */
     client_id: string;
-    name: string | Array<string>;
+    name: string | string[];
   }
 
   export interface UpdateProfileParams {
-    /** The dialog template identifier. **/
+    /** The dialog template identifier.  */
     dialog_id: string;
-    /** A client ID obtained from /dialog. **/
+    /** A client ID obtained from /dialog.  */
     client_id: string;
     name_values: string;
   }

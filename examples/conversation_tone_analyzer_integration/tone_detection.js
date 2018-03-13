@@ -23,19 +23,19 @@ var Promise = require('bluebird');
  */
 module.exports = {
   updateUserTone: updateUserTone,
-  invokeToneAsync: invokeToneAsync
+  invokeToneAsync: invokeToneAsync,
 };
 
 /**
  * invokeToneAsync is an asynchronous function that calls the Tone Analyzer service and returns a Promise
  * @param conversationPayload json object returned by the Watson Conversation Service
- * @param tone_analyzer an instance of the Watson Tone Analyzer service
- * @return a Promise for the result of calling the tone_analyzer with the conversationPayload
+ * @param toneAnalyzer an instance of the Watson Tone Analyzer service
+ * @return a Promise for the result of calling the toneAnalyzer with the conversationPayload
  * (which contains the user's input text)
  */
-function invokeToneAsync(conversationPayload, tone_analyzer) {
+function invokeToneAsync(conversationPayload, toneAnalyzer) {
   return new Promise(function(resolve, reject) {
-    tone_analyzer.tone({ text: conversationPayload.input.text }, function(error, data) {
+    toneAnalyzer.tone({ text: conversationPayload.input.text }, function(error, data) {
       if (error) {
         reject(error);
       } else {
@@ -85,9 +85,9 @@ function initUser() {
   return {
     user: {
       tone: {
-        current: null
-      }
-    }
+        current: null,
+      },
+    },
   };
 }
 
@@ -118,7 +118,7 @@ function updateTone(user, tones, maintainHistory) {
     }
     user.tone.history.push({
       tone_name: primaryTone,
-      score: primaryToneScore
+      score: primaryToneScore,
     });
   }
 }

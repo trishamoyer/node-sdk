@@ -15,19 +15,18 @@ describe('visual_recognition', function() {
   const service = {
     api_key: 'batman',
     url: 'http://ibm.com:80/visual-recognition/api',
-    version: 'v3',
-    version_date: '2016-05-20'
+    version: '2016-05-20',
   };
 
   const api_key_qs = 'api_key=' + service.api_key;
-  const version_qs = 'version=' + service.version_date;
+  const version_qs = 'version=' + service.version;
   const fake_file = fs.createReadStream(__dirname + '/../resources/car.png');
   const fake_buffer = fs.readFileSync(__dirname + '/../resources/car.png');
   const service_request = {
     images_file: fake_file,
     classifier_ids: {
-      classifier_ids: ['foo', 'bar']
-    }
+      classifier_ids: ['foo', 'bar'],
+    },
   };
 
   const classify_path = '/v3/classify?' + api_key_qs + '&' + version_qs;
@@ -42,11 +41,11 @@ describe('visual_recognition', function() {
           {
             name: 'Foo',
             classifier_id: 'foo',
-            score: 0.5
-          }
-        ]
-      }
-    ]
+            score: 0.5,
+          },
+        ],
+      },
+    ],
   };
 
   const mock_new_classifier = {
@@ -54,20 +53,20 @@ describe('visual_recognition', function() {
     name: 'Foo',
     owner: 'foo',
     status: 'foo',
-    created: 'foo'
+    created: 'foo',
   };
 
   const mock_classifiers = {
     classifiers: [
       {
         classifier_id: 'foo',
-        name: 'Foo'
+        name: 'Foo',
       },
       {
         classifier_id: 'boo',
-        name: 'Bar'
-      }
-    ]
+        name: 'Bar',
+      },
+    ],
   };
 
   before(function() {
@@ -86,7 +85,7 @@ describe('visual_recognition', function() {
     nock.cleanAll();
   });
 
-  const visual_recognition = watson.visual_recognition(service);
+  const visual_recognition = new watson.VisualRecognitionV3(service);
 
   const missingParameter = function(err) {
     assert(
@@ -106,37 +105,42 @@ describe('visual_recognition', function() {
     });
 
     it('should throw when no/insufficient credentials are provided', () => {
-      assert.throws(() => new watson.VisualRecognitionV3(), /key/);
-      assert.throws(() => new watson.VisualRecognitionV3({}), /key/);
-      assert.throws(() => new watson.VisualRecognitionV3({ version_date: '2016-05-20' }), /key/);
-      assert.throws(() => new watson.VisualRecognitionV3({ username: 'foo' }), /key/);
+      assert.throws(() => new watson.VisualRecognitionV3(), /use_unauthenticated/);
+      assert.throws(() => new watson.VisualRecognitionV3({}), /use_unauthenticated/);
+      assert.throws(
+        () => new watson.VisualRecognitionV3({ version: '2016-05-20' }),
+        /use_unauthenticated/
+      );
+      assert.throws(
+        () => new watson.VisualRecognitionV3({ username: 'foo' }),
+        /use_unauthenticated/
+      );
     });
 
     it('should accept an API key for regular usage', () =>
       new watson.VisualRecognitionV3({
         api_key: 'foo',
-        version_date: '2016-05-20'
+        version: '2016-05-20',
       }));
 
     it('should accept username/password for regular usage', () =>
       new watson.VisualRecognitionV3({
         username: 'foo',
         password: 'bar',
-        version_date: '2016-05-20'
+        version: '2016-05-20',
       }));
 
     it('should accept VISUAL_RECOGNITION_API_KEY env property', () => {
       process.env.VISUAL_RECOGNITION_API_KEY = 'foo';
-      return new watson.VisualRecognitionV3({ version_date: '2016-05-20' });
+      return new watson.VisualRecognitionV3({ version: '2016-05-20' });
     });
 
     it('should read VISUAL_RECOGNITION_API_KEY environment property', function() {
       process.env = {
-        VISUAL_RECOGNITION_API_KEY: 'foo'
+        VISUAL_RECOGNITION_API_KEY: 'foo',
       };
-      const instance = watson.visual_recognition({
-        version: 'v3',
-        version_date: '2016-05-20'
+      const instance = new watson.VisualRecognitionV3({
+        version: '2016-05-20',
       });
       assert.equal(instance._options.api_key, 'foo');
       assert.equal(instance._options.username, undefined);
@@ -146,11 +150,10 @@ describe('visual_recognition', function() {
     it('should read VISUAL_RECOGNITION_USERNAME / PASSWORD from environment properties', function() {
       process.env = {
         VISUAL_RECOGNITION_USERNAME: 'foo',
-        VISUAL_RECOGNITION_PASSWORD: 'bar'
+        VISUAL_RECOGNITION_PASSWORD: 'bar',
       };
-      const instance = watson.visual_recognition({
-        version: 'v3',
-        version_date: '2016-05-20'
+      const instance = new watson.VisualRecognitionV3({
+        version: '2016-05-20',
       });
       assert.equal(instance._options.api_key, undefined);
       assert.equal(instance._options.username, 'foo');
@@ -168,15 +171,14 @@ describe('visual_recognition', function() {
               credentials: {
                 url: 'https://gateway-a.watsonplatform.net/visual-recognition/api',
                 note: 'It may take up to 5 minutes for this key to become active',
-                api_key: 'foo'
-              }
-            }
-          ]
-        })
+                api_key: 'foo',
+              },
+            },
+          ],
+        }),
       };
-      const instance = watson.visual_recognition({
-        version: 'v3',
-        version_date: '2016-05-20'
+      const instance = new watson.VisualRecognitionV3({
+        version: '2016-05-20',
       });
       assert.equal(instance._options.api_key, 'foo');
       assert.equal(instance._options.username, undefined);
@@ -195,15 +197,14 @@ describe('visual_recognition', function() {
                 url: 'https://gateway-a.watsonplatform.net/visual-recognition/api',
                 note: 'It may take up to 5 minutes for this key to become active',
                 username: 'foo',
-                password: 'bar'
-              }
-            }
-          ]
-        })
+                password: 'bar',
+              },
+            },
+          ],
+        }),
       };
-      const instance = watson.visual_recognition({
-        version: 'v3',
-        version_date: '2016-05-20'
+      const instance = new watson.VisualRecognitionV3({
+        version: '2016-05-20',
       });
       assert.equal(instance._options.api_key, undefined);
       assert.equal(instance._options.username, 'foo');
@@ -211,14 +212,14 @@ describe('visual_recognition', function() {
     });
   });
 
-  describe('version_date', function() {
-    it('should check no version_date provided', function(done) {
+  describe('version', function() {
+    it('should check no version provided', function(done) {
       try {
-        watson.visual_recognition(omit(service, ['version_date']));
+        new watson.VisualRecognitionV3(omit(service, ['version']));
       } catch (e) {
         return done();
       }
-      done('version_date should be requested');
+      done('version should be requested');
     });
   });
 
@@ -244,15 +245,15 @@ describe('visual_recognition', function() {
     it('should generate a valid paylod with buffers', function() {
       const params = {
         images_file: fake_buffer,
-        parameters: { owners: ['me', 'IBM'] }
+        parameters: { owners: ['me', 'IBM'] },
       };
       const req = visual_recognition.classify(params, noop);
       assert.equal(req.uri.href, service.url + classify_path);
       assert.equal(req.method, 'POST');
       // we always convert files to request-style objects
       assert.equal(req.formData.images_file.value, params.images_file);
-      const parameters = JSON.parse(req.formData.parameters);
-      assert.deepEqual(parameters.owners, ['me', 'IBM']);
+      const parameters = req.formData;
+      assert.deepEqual(parameters.owners, 'me,IBM');
       assert.equal(parameters.url, undefined);
       assert.equal(parameters.threshold, undefined);
     });
@@ -260,7 +261,7 @@ describe('visual_recognition', function() {
     it('should generate a valid payload with an image file', function() {
       const params = {
         images_file: fake_file,
-        classifier_ids: ['foo', 'bar']
+        classifier_ids: ['foo', 'bar'],
       };
 
       const req = visual_recognition.classify(params, noop);
@@ -268,23 +269,21 @@ describe('visual_recognition', function() {
       assert.equal(req.method, 'POST');
       // we always convert files to request-style objects
       assert.equal(req.formData.images_file.value.path, fake_file.path);
-      const uploadedParameters = JSON.parse(req.formData.parameters);
-      assert.deepEqual(uploadedParameters.classifier_ids, params.classifier_ids);
+      assert.deepEqual(req.formData.classifier_ids, params.classifier_ids.join(','));
     });
 
     it('should generate a valid payload with a url', function() {
       const params = {
         url: 'https://watson-test-resources.mybluemix.net/resources/obama.jpg',
-        classifier_ids: ['foo', 'bar']
+        classifier_ids: ['foo', 'bar'],
       };
 
       const req = visual_recognition.classify(params, noop);
       assert.equal(req.method, 'POST');
       assert.equal(req.uri.pathname, URL.parse(service.url + classify_path).pathname);
       assert(req.formData);
-      assert(req.formData.parameters);
-      const parameters = JSON.parse(req.formData.parameters);
-      assert.deepEqual(parameters.classifier_ids, params.classifier_ids);
+      const parameters = req.formData;
+      assert.deepEqual(parameters.classifier_ids, params.classifier_ids.join(','));
     });
   });
 
@@ -309,21 +308,19 @@ describe('visual_recognition', function() {
     it('should generate a valid paylod with buffers', function() {
       const params = {
         images_file: fake_buffer,
-        parameters: { owners: ['me', 'IBM'] }
+        parameters: { owners: ['me', 'IBM'] },
       };
       const req = visual_recognition.detectFaces(params, noop);
       assert.equal(req.uri.href, service.url + detect_faces_path);
       assert.equal(req.method, 'POST');
       // we always convert files to request-style objects
       assert.equal(req.formData.images_file.value, params.images_file);
-      const parameters = JSON.parse(req.formData.parameters);
-      assert.deepEqual(parameters, params.parameters);
     });
 
     it('should generate a valid payload with an image file', function() {
       const params = {
         images_file: fake_file,
-        classifier_ids: ['foo', 'bar']
+        classifier_ids: ['foo', 'bar'],
       };
 
       const req = visual_recognition.detectFaces(params, noop);
@@ -331,23 +328,21 @@ describe('visual_recognition', function() {
       assert.equal(req.method, 'POST');
       // we always convert files to request-style objects
       assert.equal(req.formData.images_file.value.path, fake_file.path);
-      const parameters = JSON.parse(req.formData.parameters);
-      assert.deepEqual(parameters.classifier_ids, params.classifier_ids);
+      assert.deepEqual(req.formData.images_file.value, params.images_file);
     });
 
     it('should generate a valid payload with a url', function() {
       const params = {
         url: 'https://watson-test-resources.mybluemix.net/resources/obama.jpg',
-        classifier_ids: ['foo', 'bar']
+        classifier_ids: ['foo', 'bar'],
       };
 
       const req = visual_recognition.detectFaces(params, noop);
       assert.equal(req.method, 'POST');
       assert.equal(req.uri.pathname, URL.parse(service.url + detect_faces_path).pathname);
       assert(req.formData);
-      assert(req.formData.parameters);
-      const parameters = JSON.parse(req.formData.parameters);
-      assert.deepEqual(parameters.classifier_ids, params.classifier_ids);
+      const parameters = req.formData;
+      assert.deepEqual(parameters.url, params.url);
     });
   });
 
@@ -383,7 +378,7 @@ describe('visual_recognition', function() {
       const params = {
         foo_positive_examples: fake_file,
         negative_examples: fake_file,
-        name: 'test-c'
+        name: 'test-c',
       };
 
       // todo: make this fully async
@@ -430,7 +425,7 @@ describe('visual_recognition', function() {
       const params = {
         foo_positive_examples: fake_file,
         negative_examples: fake_file,
-        classifier_id: 'foo'
+        classifier_id: 'foo',
       };
 
       // todo: make this fully async
@@ -470,7 +465,7 @@ describe('visual_recognition', function() {
 
       visual_recognition.deleteClassifier(
         {
-          classifier_id: 'foo_123'
+          classifier_id: 'foo_123',
         },
         function(err) {
           if (err) {
@@ -505,7 +500,7 @@ describe('visual_recognition', function() {
         owner: 'a3a48ea7-492b-448b-87d7-9dade8bde5a9',
         status: 'ready',
         created: '2016-05-23T21:50:41.680Z',
-        classes: [{ class: 'banana' }, { class: 'apple' }]
+        classes: [{ class: 'banana' }, { class: 'apple' }],
       };
       const scope = nock('http://ibm.com:80', { encodedQueryParams: true })
         .get('/visual-recognition/api/v3/classifiers/fruit_679357912')
@@ -514,7 +509,7 @@ describe('visual_recognition', function() {
 
       visual_recognition.getClassifier(
         {
-          classifier_id: 'fruit_679357912'
+          classifier_id: 'fruit_679357912',
         },
         function(err, res) {
           if (err) {
@@ -553,7 +548,7 @@ describe('visual_recognition', function() {
       'setImageData',
       'getImageData',
       'deleteImageData',
-      'findSimilar'
+      'findSimilar',
     ];
     deprecatedMethods.forEach(function(method) {
       it(`${method} should print a warning message`, function() {

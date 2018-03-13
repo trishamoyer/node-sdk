@@ -50,11 +50,11 @@ export import VisualRecognitionV3 = require('./visual-recognition/v3');
 // e.g. servicesByVersion.text_to_speech.v1 === export import TextToSpeechV1;
 const servicesByVersion = {};
 Object.keys(exports).forEach(key => {
-  const Service = exports[key];
-  const name = Service.prototype.name;
-  const version = Service.prototype.version;
+  const service = exports[key];
+  const name = service.prototype.name;
+  const version = service.prototype.serviceVersion;
   servicesByVersion[name] = servicesByVersion[name] || {};
-  servicesByVersion[name][version] = Service;
+  servicesByVersion[name][version] = service;
 });
 
 Object.keys(servicesByVersion).forEach(serviceName => {
@@ -62,7 +62,16 @@ Object.keys(servicesByVersion).forEach(serviceName => {
     enumerable: false,
     configurable: true,
     writable: true,
-    value: function(options) {
+    value(options) {
+
+      // eslint-disable-next-line no-console
+      console.warn(
+        'WARNING: This method of instantiating the Watson services has been deprecated ' +
+            'beginning with Version 3.0.0 of the Node SDK.  Please refer to the Node SDK ' +
+            'documentation for information on how to instantiate Watson services.  This ' +
+            'form of service instantiaion will be removed in a future release of the SDK.'
+      );
+
       options = options || {};
 
       // previously, AlchemyAPI did not require a version to be specified
@@ -70,15 +79,19 @@ Object.keys(servicesByVersion).forEach(serviceName => {
         options.version = 'v1';
       }
 
-      const Service = servicesByVersion[serviceName][options.version];
+      const service = servicesByVersion[serviceName][options.version];
 
-      if (!Service) {
+      if (!service) {
         throw new Error(
           'Unable to find ' + serviceName + ' version ' + options.version
         );
       }
 
-      return new Service(options);
+      return new service({
+        ...options,
+        serviceVersion: options.version,
+        version: options.version_date,
+      });
     }
   });
 });
@@ -102,7 +115,7 @@ Object.keys(servicesByVersion).forEach(serviceName => {
     enumerable: false,
     configurable: true,
     writable: true,
-    value: function() {
+    value() {
       throw new Error('The ' + serviceName + ' service is no longer available');
     }
   });
@@ -112,7 +125,7 @@ Object.keys(servicesByVersion).forEach(serviceName => {
     enumerable: false,
     configurable: true,
     writable: true,
-    value: function() {
+    value() {
       throw new Error(
         'The Alchemy Vision service is no longer available, please use Visual Recognition instead.'
       );

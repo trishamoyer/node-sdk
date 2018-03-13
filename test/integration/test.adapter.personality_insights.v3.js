@@ -10,7 +10,7 @@ const describe = authHelper.describe; // this runs describe.skip if there is no 
 const TWENTY_SECONDS = 20000;
 const TWO_SECONDS = 2000;
 
-describe('personality_insights_v3_integration', function() {
+describe('personality_insights_v3_adapter_integration', function() {
   this.retries(1);
 
   this.slow(TWO_SECONDS); // this controls when the tests get a colored warning for taking too long
@@ -20,6 +20,8 @@ describe('personality_insights_v3_integration', function() {
 
   before(function() {
     mobydick = fs.readFileSync(path.join(__dirname, '../resources/mobydick.txt'), 'utf8');
+    auth.personality_insights.v3.version = 'v3';
+    auth.personality_insights.v3.version_date = '2016-10-19';
     personality_insights = watson.personality_insights(auth.personality_insights.v3);
     nock.enableNetConnect();
   });
@@ -30,14 +32,14 @@ describe('personality_insights_v3_integration', function() {
 
   it('profile()', function(done) {
     const params = {
-      text: mobydick
+      text: mobydick,
     };
     personality_insights.profile(params, done);
   });
 
   it('profile_html()', function(done) {
     const params = {
-      text: '<div>' + mobydick + '</div>'
+      text: '<div>' + mobydick + '</div>',
     };
     personality_insights.profile(params, done);
   });
@@ -49,8 +51,8 @@ describe('personality_insights_v3_integration', function() {
       consumption_preferences: true,
       csv_headers: true,
       headers: {
-        accept: 'text/csv'
-      }
+        accept: 'text/csv',
+      },
     };
     personality_insights.profile(params, done);
   });

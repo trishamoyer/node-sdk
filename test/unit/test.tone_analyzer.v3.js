@@ -10,7 +10,7 @@ describe('tone_analyzer.v3', function() {
 
   const text = 'IBM Watson Developer Cloud';
   const tone_response = {
-    tree: {}
+    tree: {},
   };
 
   const tone_path = '/v3/tone';
@@ -19,14 +19,13 @@ describe('tone_analyzer.v3', function() {
     username: 'batman',
     password: 'bruce-wayne',
     url: 'http://ibm.com:86',
-    version: 'v3',
-    version_date: '2017-09-21'
+    version: '2017-09-21',
   };
   const service_es = extend(service, {
     headers: {
       'Accept-Language': 'es',
-      'x-custom-header': 'foo'
-    }
+      'x-custom-header': 'foo',
+    },
   });
 
   before(function() {
@@ -41,8 +40,8 @@ describe('tone_analyzer.v3', function() {
     nock.cleanAll();
   });
 
-  const tone_analyzer = watson.tone_analyzer(service);
-  const tone_analyzer_es = watson.tone_analyzer(service_es);
+  const tone_analyzer = new watson.ToneAnalyzerV3(service);
+  const tone_analyzer_es = new watson.ToneAnalyzerV3(service_es);
 
   const missingParameter = function(err) {
     assert.ok(err instanceof Error && /required parameters/.test(err));
@@ -70,7 +69,7 @@ describe('tone_analyzer.v3', function() {
     const options = {
       tone_input: text,
       content_type: 'text/plain',
-      sentences: true
+      sentences: true,
     };
     const req = tone_analyzer.tone(options, noop);
     const body = Buffer.from(req.body).toString('ascii');
@@ -87,7 +86,7 @@ describe('tone_analyzer.v3', function() {
       content_type: 'text/plain',
       sentences: true,
       content_language: 'en',
-      accept_language: 'en'
+      accept_language: 'en',
     };
     const req = tone_analyzer.tone(options, noop);
     const body = Buffer.from(req.body).toString('ascii');
@@ -136,31 +135,30 @@ describe('tone_analyzer.v3', function() {
     assert.equal(req.headers['Accept-Language'], 'es');
   });
 
+  const tone_chat_path = '/v3/tone_chat';
+
   // Tone Chat Endpoint API - test for valid payload
-  it('tone-chat API endpoint should generate a valid payload with utterances json payload', function(
-    done
-  ) {
-    const tone_chat_path = '/v3/tone_chat';
+  it('tone-chat API endpoint should generate a valid payload with utterances json payload', function(done) {
     const tone_chat_request = {
       utterances: [
         { text: 'My charger isn’t working.', user: 'customer' },
         {
           text: 'Thanks for reaching out. Can you give me some more detail about the issue?',
-          user: 'agent'
+          user: 'agent',
         },
         {
           text:
             "I put my charger in my phone last night to charge and it isn't working. Which is ridiculous, it's a new charger, I bought it yesterday.",
-          user: 'customer'
+          user: 'customer',
         },
         {
           text: 'I’m sorry you’re having issues with charging. What kind of charger do you have?',
-          user: 'agent'
-        }
-      ]
+          user: 'agent',
+        },
+      ],
     };
     const tone_chat_response = {
-      tree: {}
+      tree: {},
     };
 
     const expectation = nock(service.url)
@@ -180,5 +178,20 @@ describe('tone_analyzer.v3', function() {
       assert(expectation.isDone());
       done();
     });
+  });
+
+  it('tone-chat API should add optional language parameters', function() {
+    const options = {
+      utterances: [{ text: 'My charger isn’t working.', user: 'customer' }],
+      content_language: 'en',
+      accept_language: 'en',
+    };
+    const req = tone_analyzer.tone_chat(options, noop);
+    assert.equal(req.uri.href, service.url + tone_chat_path + '?version=2017-09-21');
+    assert.equal(req.method, 'POST');
+    assert.equal(req.headers['Content-Type'], 'application/json');
+    assert.equal(req.headers['Accept'], 'application/json');
+    assert.equal(req.headers['Content-Language'], 'en');
+    assert.equal(req.headers['Accept-Language'], 'en');
   });
 });

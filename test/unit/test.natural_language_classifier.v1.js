@@ -10,7 +10,7 @@ const service = {
   username: 'foo',
   password: 'bar',
   url: 'http://ibm.com:80',
-  version: 'v1'
+  version: 'v1',
 };
 
 before(function() {
@@ -43,7 +43,7 @@ const goodClassifier = { classifier_id: 'good' };
 const goodData = { text: 'good' };
 const goodDataWithClassifierId = { text: 'good', classifier_id: 'good' };
 const noTrainingData = {
-  metadata: JSON.stringify({ language: 'en', name: 'foo' })
+  metadata: JSON.stringify({ language: 'en', name: 'foo' }),
 };
 
 // training requests
@@ -51,20 +51,20 @@ const noTrainingData = {
 const createWithString = { training_data: 'foo' };
 // training with a stream variable (CSV)
 const createWithStream = {
-  training_data: fs.createReadStream(__dirname + '/../resources/weather_data_train.csv')
+  training_data: fs.createReadStream(__dirname + '/../resources/weather_data_train.csv'),
 };
 // training with a buffer variable (CSV)
 const createWithBuffer = {
-  training_data: fs.readFileSync(__dirname + '/../resources/weather_data_train.csv')
+  training_data: fs.readFileSync(__dirname + '/../resources/weather_data_train.csv'),
 };
 // training with a form-data object
 const createWithObject = {
   training_data: {
-    value: fs.readFileSync(__dirname + '/../resources/weather_data_train.csv')
-  }
+    value: fs.readFileSync(__dirname + '/../resources/weather_data_train.csv'),
+  },
 };
 
-describe('natural_language_classifer', function() {
+describe('natural_language_classifier', function() {
   it('should fail if no parameters are provided for create, classify, status and delete requests', function() {
     // classify
     natural_language_classifier.classify({}, missingParameter);

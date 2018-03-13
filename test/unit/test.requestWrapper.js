@@ -4,18 +4,51 @@ const createRequest = require('../../lib/requestwrapper').createRequest;
 const formatError = require('../../lib/requestwrapper').formatErrorIfExists;
 const assert = require('assert');
 const isStream = require('isstream');
+const watson = require('../../index');
+const pjson = require('../../package.json');
 
 describe('requestwrapper', () => {
+  const noop = function() {};
   it('should emit error stream on missing parameters when callback is undefined', () => {
     const parameters = {
       options: {
         url: '/stuff/',
-        qs: { fake: 'fake' }
+        qs: { fake: 'fake' },
       },
       requiredParams: ['fake_param'],
-      defaultOptions: { url: 'more' }
+      defaultOptions: { url: 'more' },
     };
     assert(isStream(createRequest(parameters, '')));
+  });
+
+  it('header should be accurate', () => {
+    const service = {
+      username: 'batman',
+      password: 'bruce-wayne',
+      url: 'http://ibm.com:80',
+      version: '2017-05-26',
+    };
+    const service2 = {
+      username: 'batman',
+      password: 'bruce-wayne',
+      url: 'http://ibm.com:80',
+      version: '2017-05-26',
+      headers: {
+        'User-Agent': 'openwhisk',
+      },
+    };
+    const conversation = new watson.ConversationV1(service);
+    const conversation_ow = new watson.ConversationV1(service2);
+    const payload = {
+      workspace_id: 'workspace1',
+    };
+    const req = conversation.getIntents(payload, noop);
+    const req2 = conversation_ow.getIntents(payload, noop);
+    assert.equal(req.headers['User-Agent'], 'watson-developer-cloud-nodejs-' + pjson.version + ';');
+    assert.equal(
+      req2.headers['User-Agent'],
+      'watson-developer-cloud-nodejs-' + pjson.version + ';' + 'openwhisk'
+    );
   });
 });
 
@@ -52,7 +85,7 @@ describe('formatError', () => {
     const _response = {};
     const _body = {
       error: { description: 'fake description' },
-      fake_key: 'fake_value'
+      fake_key: 'fake_value',
     };
     const cb = (err, body, res) => {
       assert.equal(body, null);
@@ -69,7 +102,7 @@ describe('formatError', () => {
     const _response = {};
     const _body = {
       error: { error: { error: 'fake description' } },
-      fake_key: 'fake_value'
+      fake_key: 'fake_value',
     };
     const cb = (err, body, res) => {
       assert.equal(body, null);
